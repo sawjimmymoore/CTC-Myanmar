@@ -10,16 +10,18 @@ export function Words({ text, base = 0 }: { text: string; base?: number }) {
 }
 export function Footer() {
   const tr = useTr(); const { footer, services, audiences, nav } = useContent();
-  const C = (t: string, items: [string, string][]) => <div className="grid content-start gap-2"><b className="font-accent tracking-wide text-white">{t}</b>{items.map(([n, h]) => <Link key={h + n} href={h} className="hover:text-white">{n}</Link>)}</div>;
-  return <footer className="dark-sec pb-20 pt-16 text-sm sm:pb-10"><div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-5">
-    <div className="soft md:col-span-2"><div className="inline-block rounded-2xl bg-white p-3"><Image src="/assets/logo-full.png" alt="Click to Create" width={120} height={132} /></div><p className="mt-4 max-w-xs">{tr(footer.blurb)}</p><a href={`mailto:${EMAIL}`} className="mt-4 block text-white">{EMAIL}</a><span>{tr(footer.phone)}</span></div>
-    <div className="soft grid content-start gap-10 md:col-span-3 md:grid-cols-3">
-      {C(tr(nav.services), services.filter((s) => s.group === "core").slice(0, 6).map((s) => [tr(s.name), `/services/${s.slug}`]))}
+  const C = (t: string, items: [string, string][]) => <div className="grid content-start gap-2.5"><b className="eyebrow !text-sage">{t}</b>{items.map(([n, h]) => <Link key={h + n} href={h} className="text-white/75 hover:text-white">{n}</Link>)}</div>;
+  return <footer className="bg-[#0b1b36] pb-20 pt-16 text-sm text-white sm:pb-10"><div className="mx-auto grid max-w-[1240px] gap-10 px-6 lg:grid-cols-[1.1fr_1fr_2fr]">
+    <div><div className="inline-block rounded-2xl bg-white p-3"><Image src="/assets/logo-full.png" alt="Click to Create" width={110} height={121} /></div><p className="mt-5 max-w-xs text-white/70">{tr(footer.blurb)}</p><a href={`mailto:${EMAIL}`} className="mt-4 block font-medium">{EMAIL}</a><span className="text-white/60">{tr(footer.phone)}</span>
+      <div className="mt-6 grid gap-2 text-xs text-white/70"><b className="eyebrow !text-sage">Our commitments</b>{["You own your data", "Secure by design", "One point of contact"].map((x) => <span key={x} className="flex items-center gap-2"><i className="size-1.5 rounded-full bg-sage" />{x}</span>)}</div></div>
+    <div className="mesh rounded-2xl p-7"><p className="eyebrow !text-white/80">The bottom line</p><p className="mt-3 text-xl font-semibold leading-snug">One accountable team for your website, software and content.</p><Link href="/book" className="btn btn-light mt-6">{tr(nav.book)}</Link></div>
+    <div className="grid gap-8 sm:grid-cols-3">
+      {C(tr(nav.services), services.filter((s) => s.group === "core").map((s) => [tr(s.name), `/services/${s.slug}`]))}
       {C(tr(nav.who), audiences.map((a) => [tr(a.name), `/for/${a.slug}`]))}
       {C("CTC", [[tr(nav.how), "/how-it-works"], [tr(nav.packages), "/packages"], [tr(nav.updates), "/updates"], [tr(nav.about), "/about"], ["Contact", "/contact"], ["Privacy", "/privacy"], ["Terms", "/terms"]])}</div></div>
-    <div className="soft mx-auto mt-12 flex max-w-6xl justify-between px-6 text-xs"><span>{tr(footer.copy)}</span><Link href="/admin">Admin</Link></div></footer>;
+    <div className="mx-auto mt-12 flex max-w-[1240px] flex-wrap justify-between gap-3 border-t border-white/10 px-6 pt-6 text-xs text-white/50"><span>{tr(footer.copy)}</span><Link href="/admin">Admin</Link></div></footer>;
 }
 export function Page({ children }: { children: React.ReactNode }) { return <><Nav /><main>{children}</main><Footer /></>; }
 export function Head({ tag, title, sub }: { tag: string; title: string; sub?: string }) {
-  return <header className="relative overflow-hidden"><div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(55% 80% at 85% 0%,rgba(143,176,138,.35),transparent 70%)" }} /><div className="relative mx-auto max-w-6xl px-6 pb-14 pt-36"><p className="eyebrow mb-4">{tag}</p><h1 className="max-w-4xl font-display text-6xl leading-[.92] md:text-8xl">{title}</h1>{sub && <p className="mt-6 max-w-xl text-soft">{sub}</p>}</div></header>;
+  return <header className="mesh pb-20 pt-40"><div className="mx-auto max-w-[1240px] px-6"><p className="eyebrow !text-white/80">{tag}</p><h1 className="h-sec mt-4 max-w-4xl text-5xl md:text-7xl">{title}</h1>{sub && <p className="mt-6 max-w-xl text-lg text-white/80">{sub}</p>}</div></header>;
 }

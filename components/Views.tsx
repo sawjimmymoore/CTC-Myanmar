@@ -1,50 +1,51 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, Check, X, ShieldCheck, Layers, UserCheck, Database } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Check, X, ChevronsRight } from "lucide-react";
 import { Words, Head } from "./Site";
 import Marquee from "./Marquee";
 import Magnetic from "./Magnetic";
 import TiltCard from "./TiltCard";
-import MotionBackground from "./MotionBackground";
+import { PinnedSteps, Bento, HoverRows, StackCards, CountUp, HeroTiles } from "./Effects2";
 import ScrollTextHighlight from "./effects/ScrollTextHighlight";
 import FaqAccordion from "./FaqAccordion";
-import { H2, Tag, CtaBand, ServiceRows, PackageFamily } from "./Blocks";
+import { H2, Tag, CtaBand, PackageFamily } from "./Blocks";
 import { useTr } from "@/lib/i18n";
 import { useContent } from "@/lib/content-context";
 type Post = { slug: string; title: string; category: string; excerpt: string };
-const icons = [UserCheck, ShieldCheck, Layers, Database];
 const Steps = () => { const tr = useTr(); const { steps } = useContent(); return <div className="mt-12 grid gap-6 md:grid-cols-4">{steps.items.map((s, i) => <div key={i} className="border-t border-current/20 pt-5"><b className="font-display text-6xl font-normal text-sage">{i + 1}</b><h3 className="mt-2 font-semibold">{tr(s.t)}</h3><p className="soft mt-1 text-sm opacity-80">{tr(s.d)}</p></div>)}</div>; };
 const Faq = () => { const tr = useTr(); const { faq } = useContent(); return <FaqAccordion items={faq.map((f) => ({ q: tr(f.q), a: tr(f.a) }))} />; };
 
+const TOOLS = ["QuickBooks", "Zoho Books", "Odoo", "Next.js", "Supabase", "Meta Ads", "Google Ads", "TikTok Ads", "Google Workspace", "Microsoft 365", "Telegram"];
 export function HomeView({ posts }: { posts: Post[] }) {
-  const tr = useTr(); const c = useContent(); const { hero } = c;
+  const tr = useTr(); const c = useContent(); const { hero } = c; const [aud, setAud] = useState(0); const A = c.audiences[aud];
   return <>
-    <section className="relative flex min-h-svh items-end overflow-hidden px-6 pb-24 pt-32 sm:pb-16" style={{ background: "radial-gradient(55% 55% at 82% 28%,rgba(143,176,138,.45),transparent 70%),radial-gradient(45% 45% at 8% 90%,rgba(143,176,138,.22),transparent 70%),#f6f7f5" }}>
-      <div className="pointer-events-none absolute inset-0 opacity-40"><MotionBackground /></div>
-      <div className="relative mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[1fr_260px] lg:items-end"><div>
-        <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-hair bg-white/70 px-4 py-1.5 text-xs text-soft"><i className="size-2 rounded-full bg-sage" />{tr(hero.badge)}</p>
-        <h1 className="font-display text-[clamp(56px,11.5vw,170px)] leading-[.92]"><Words text={tr(hero.line1)} /><br /><Words text={tr(hero.line2)} base={4} /></h1>
-        <p className="my-6 max-w-lg text-soft">{tr(hero.sub)}</p>
-        <div className="flex flex-wrap gap-3"><Magnetic><Link href="/book" className="btn">{tr(hero.primary)} <ArrowRight size={16} /></Link></Magnetic><Link href="/services" className="btn btn-ghost">{tr(hero.secondary)}</Link></div>
-        <p className="mt-5 text-xs text-soft">{tr(hero.note)}</p></div>
-        <div className="hidden gap-3 lg:grid">{hero.stats.map((s, i) => <div key={i} className="rounded-2xl border border-hair bg-white/80 p-5 backdrop-blur"><b className="font-display text-5xl font-normal">{tr(s.n)}</b><p className="text-xs text-soft">{tr(s.label)}</p></div>)}</div></div></section>
-    <Marquee items={hero.marquee} className="border-y border-hair bg-white py-4" />
-    <section className="px-6 py-28"><div className="mx-auto max-w-4xl"><Tag>{tr(c.problem.tag)}</Tag><ScrollTextHighlight className="font-display text-5xl leading-[1] md:text-7xl" text={tr(c.problem.text)} /></div>
-      <div className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-4">{c.problem.cards.map((x, i) => <TiltCard key={i} className="rounded-3xl border border-hair bg-white p-7"><h3 className="font-accent text-xl tracking-wide">{tr(x.t)}</h3><p className="mt-2 text-sm text-soft">{tr(x.d)}</p></TiltCard>)}</div></section>
-    <section className="dark-sec px-6 py-28"><div className="mx-auto max-w-6xl"><Tag>{tr(c.steps.tag)}</Tag><H2 text={tr(c.steps.title)} /><Steps /></div></section>
-    <section className="px-6 py-28"><div className="mx-auto max-w-6xl"><Tag>Built for every stage</Tag><H2 text="Made for the way you work." />
-      <div className="mt-12 grid gap-5 md:grid-cols-2">{c.audiences.map((a) => <Link key={a.slug} href={`/for/${a.slug}`}><TiltCard className="h-full rounded-3xl border border-hair bg-white p-8"><h3 className="font-display text-4xl">{tr(a.name)}</h3><p className="mt-2 text-soft">{tr(a.line)}</p><span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-sage-deep">See how we help <ArrowRight size={15} /></span></TiltCard></Link>)}</div></div></section>
-    <section className="bg-white px-6 py-28"><div className="mx-auto max-w-6xl"><Tag>{tr(c.nav.services)}</Tag><H2 text="Everything your brand needs, built to be used." className="mb-12" /><ServiceRows /></div></section>
-    <section className="bg-sage-soft px-6 py-28"><div className="mx-auto max-w-6xl"><Tag>Why CTC</Tag><H2 text="Responsibility, not just delivery." />
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{c.why.map((w, i) => { const I = icons[i % 4]; return <div key={i} className="rounded-3xl bg-white p-6"><I className="text-sage-deep" /><h3 className="mt-4 font-semibold">{tr(w.t)}</h3><p className="mt-2 text-sm text-soft">{tr(w.d)}</p></div>; })}</div></div></section>
-    <section className="px-6 py-28"><div className="mx-auto max-w-6xl"><Tag>{tr(c.nav.packages)}</Tag><H2 text={tr(c.packages.title)} className="mb-12" />
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">{c.packages.families.map((f) => <Link key={f.id} href={`/packages#${f.id}`}><TiltCard className="h-full rounded-3xl border border-hair bg-white p-7"><h3 className="font-display text-4xl">{tr(f.name)}</h3><p className="mt-2 text-sm text-soft">{tr(f.intro)}</p><p className="mt-4 text-xs font-semibold text-sage-deep">{f.tiers.map((t) => t.name.en).join(" / ")}</p></TiltCard></Link>)}</div></div></section>
-    {posts.length > 0 && <section className="bg-white px-6 py-24"><div className="mx-auto max-w-6xl"><div className="mb-10 flex items-end justify-between"><H2 text="Latest updates" /><Link href="/updates" className="text-sm font-semibold text-sage-deep">All updates</Link></div><div className="grid gap-5 md:grid-cols-3">{posts.map((p) => <Link key={p.slug} href={`/updates/${p.slug}`} className="rounded-3xl border border-hair p-6 transition hover:bg-paper"><small className="eyebrow">{p.category}</small><h3 className="mt-2 text-xl font-semibold">{p.title}</h3><p className="mt-2 text-sm text-soft">{p.excerpt}</p></Link>)}</div></div></section>}
-    <section className="px-6 py-28"><div className="mx-auto max-w-3xl"><H2 text="Questions we hear first." className="mb-10" /><Faq /></div></section>
+    <section className="mesh relative flex min-h-svh flex-col justify-end overflow-hidden px-6 pb-14 pt-36"><HeroTiles />
+      <div className="relative mx-auto w-full max-w-[1240px]"><p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs backdrop-blur"><i className="size-2 rounded-full bg-sage" />{tr(hero.badge)}</p>
+        <h1 className="font-display text-[clamp(52px,9.4vw,158px)] leading-[.92]"><Words text={tr(hero.line1)} /><br /><Words text={tr(hero.line2)} base={4} /></h1>
+        <p className="mt-6 max-w-xl text-lg text-white/85">{tr(hero.sub)}</p>
+        <div className="mt-8 flex flex-wrap gap-3"><Magnetic><Link href="/book" className="btn btn-light">{tr(hero.primary)} <ChevronsRight size={16} /></Link></Magnetic><Link href="/services" className="btn border border-white/40 bg-transparent text-white hover:bg-white/10">{tr(hero.secondary)}</Link></div>
+        <p className="mt-14 text-sm text-white/80">{tr(hero.note)}</p></div></section>
+    <div className="border-b border-hair bg-white py-5"><p className="eyebrow mb-3 text-center">Tools and platforms we work with</p><Marquee items={TOOLS} className="py-1" /></div>
+    <section className="bg-white px-6 py-28"><div className="mx-auto max-w-4xl"><Tag>{tr(c.problem.tag)}</Tag><ScrollTextHighlight className="h-sec text-4xl leading-[1.08] md:text-6xl" text={tr(c.problem.text)} /></div></section>
+    <PinnedSteps />
+    <section className="bg-paper px-6 py-28"><div className="mx-auto max-w-[1240px]"><div className="mx-auto max-w-3xl text-center"><Tag>Why teams choose CTC</Tag><H2 text="Clients move faster when one team takes responsibility." /></div>
+      <div className="mt-14 grid gap-5 md:grid-cols-4">{[[5, "", "Service lines under one team"], [1, "", "Point of contact, scoping to go-live"], [100, "%", "Your data stays yours"], [13, "", "Services you can add as you grow"]].map(([n, sfx, l]) => <div key={String(l)} className="rounded-3xl border border-hair bg-white p-7"><b className="font-display text-7xl font-normal"><CountUp to={n as number} suffix={sfx as string} /></b><p className="mt-2 text-sm text-soft">{l}</p></div>)}</div></div></section>
+    <section className="bg-white px-6 py-28"><div className="mx-auto max-w-[1240px]"><div className="mb-12 max-w-3xl"><Tag>{tr(c.nav.services)}</Tag><H2 text="Everything under one roof, built to be used." /></div><Bento /></div></section>
+    <section className="bg-paper px-6 py-28"><div className="mx-auto max-w-[1240px]"><div className="mx-auto max-w-3xl text-center"><Tag>Built for every stage</Tag><H2 text="Whatever your organization looks like, we fit." /></div>
+      <div className="mt-12 flex flex-wrap justify-center gap-2">{c.audiences.map((a, i) => <button key={a.slug} onClick={() => setAud(i)} aria-pressed={aud === i} className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition ${aud === i ? "border-navy bg-navy text-white" : "border-hair bg-white"}`}>{tr(a.name)}</button>)}</div>
+      <AnimatePresence mode="wait"><motion.div key={aud} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: .35 }} className="mx-auto mt-8 grid max-w-5xl gap-8 rounded-3xl border border-hair bg-white p-8 md:grid-cols-2 md:p-12">
+        <div><h3 className="h-sec text-4xl">{tr(A.name)}</h3><p className="mt-3 text-soft">{tr(A.line)}</p><Link href={`/for/${A.slug}`} className="btn mt-7">See how we help <ArrowRight size={15} /></Link></div>
+        <ul className="grid gap-3">{A.pains.map((p, i) => <li key={i} className="flex gap-3 rounded-2xl bg-paper p-4 text-sm"><X size={16} className="mt-0.5 shrink-0 text-red-600" />{tr(p)}</li>)}</ul></motion.div></AnimatePresence></div></section>
+    <section className="bg-white px-6 py-28"><div className="mx-auto max-w-[1240px]"><Tag>What we do</Tag><H2 text="Hover to explore. Click to book." className="mb-12" /><HoverRows /></div></section>
+    <section className="bg-paper px-6 pb-12 pt-28"><div className="mx-auto max-w-[1100px]"><div className="mb-14 max-w-3xl"><Tag>{tr(c.nav.packages)}</Tag><H2 text={tr(c.packages.title)} /></div><StackCards /></div></section>
+    {posts.length > 0 && <section className="bg-white px-6 py-24"><div className="mx-auto max-w-[1240px]"><div className="mb-10 flex items-end justify-between"><H2 text="Latest updates" /><Link href="/updates" className="text-sm font-semibold text-sage-deep">All updates</Link></div><div className="grid gap-5 md:grid-cols-3">{posts.map((p) => <Link key={p.slug} href={`/updates/${p.slug}`} className="card-glow rounded-3xl border border-hair p-6"><small className="eyebrow">{p.category}</small><h3 className="mt-2 text-xl font-semibold">{p.title}</h3><p className="mt-2 text-sm text-soft">{p.excerpt}</p></Link>)}</div></div></section>}
+    <section className="bg-paper px-6 py-28"><div className="mx-auto max-w-3xl"><H2 text="Questions we hear first." className="mb-10" /><Faq /></div></section>
     <CtaBand /></>;
 }
 export function ServicesView() { const tr = useTr(); const { nav } = useContent();
-  return <><Head tag={tr(nav.services)} title="What CTC builds, runs and looks after." sub="Pick one service or combine them. Every project has one point of contact." /><div className="mx-auto max-w-6xl px-6 pb-20"><ServiceRows /><div className="mt-24"><H2 text="Ongoing care and growth." className="mb-10" /><ServiceRows group="care" /></div></div><CtaBand title="Not sure what you need?" sub="Tell us your goal. We recommend the shortest path." /></>; }
+  return <><Head tag={tr(nav.services)} title="What CTC builds, runs and looks after." sub="Pick one service or combine them. Every project has one point of contact." /><div className="bg-white px-6 py-20"><div className="mx-auto max-w-[1240px]"><HoverRows /><div className="mt-24"><H2 text="Ongoing care and growth." className="mb-10" /><HoverRows group="care" /></div></div></div><CtaBand title="Not sure what you need?" sub="Tell us your goal. We recommend the shortest path." /></>; }
 export function ServiceView({ slug }: { slug: string }) {
   const tr = useTr(); const { services, platforms, steps, nav } = useContent(); const s = services.find((x) => x.slug === slug); if (!s) return <Head tag="Not found" title="Service not found" />;
   return <><Head tag={s.tag} title={tr(s.headline)} sub={tr(s.blurb)} />
@@ -66,7 +67,7 @@ export function PackagesView() { const tr = useTr(); const { packages } = useCon
     <div className="mx-auto grid max-w-6xl gap-24 px-6 py-16">{packages.families.map((f) => <PackageFamily key={f.id} id={f.id} />)}</div>
     <div className="mx-auto max-w-3xl px-6 pb-24"><H2 text="Questions" className="mb-8" /><Faq /></div><CtaBand title="Get your quotation" /></>; }
 export function HowView() { const tr = useTr(); const { steps } = useContent(); const more = ["Discovery notes shared in writing", "Approval limits and roles mapped before building", "Data imported and cleaned with you", "Training per role: staff, approvers, admins", "Short user guide and Q and A at handover", "Go-live support while your team starts"];
-  return <><Head tag={tr(steps.tag)} title="From first call to go-live, in four steps." sub="You always know what happens next." /><div className="mx-auto max-w-4xl px-6 pb-24">{steps.items.map((s, i) => <div key={i} className="grid gap-4 border-t border-hair py-10 md:grid-cols-[120px_1fr]"><b className="font-display text-7xl font-normal text-sage">{i + 1}</b><div><h2 className="text-2xl font-semibold">{tr(s.t)}</h2><p className="mt-2 text-soft">{tr(s.d)}</p></div></div>)}
+  return <><Head tag={tr(steps.tag)} title="From first call to go-live, in four steps." sub="You always know what happens next." /><PinnedSteps title="Four steps. No surprises." /><div className="mx-auto max-w-4xl px-6 py-24">
     <h2 className="mb-6 mt-16 font-display text-5xl">What you can expect</h2><ul className="grid gap-3 sm:grid-cols-2">{more.map((m) => <li key={m} className="rounded-2xl border border-hair bg-white p-4 text-sm">{m}</li>)}</ul></div><CtaBand /></>; }
 export function WebsitesView() { const tr = useTr(); const { siteTypes } = useContent();
   return <><Head tag="Websites" title="Ten kinds of website. One accountable builder." sub="Tell us what you need to achieve. We choose the structure that gets you there." /><div className="mx-auto grid max-w-6xl gap-4 px-6 pb-16 sm:grid-cols-2 lg:grid-cols-3">{siteTypes.map((s, i) => <TiltCard key={i} className="rounded-3xl border border-hair bg-white p-7"><h2 className="font-display text-3xl">{tr(s.name)}</h2><p className="mt-2 text-sm text-soft">{tr(s.desc)}</p></TiltCard>)}</div><div className="px-6 pb-24 text-center"><Link href="/services/websites" className="font-semibold text-sage-deep underline">See what is included in every website</Link></div><CtaBand title="Plan your site" /></>; }

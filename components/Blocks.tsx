@@ -7,12 +7,12 @@ import RevealText from "./RevealText";
 import { EMAIL } from "@/content/site-content";
 import { useTr } from "@/lib/i18n";
 import { useContent } from "@/lib/content-context";
-export const H2 = ({ text, className = "" }: { text: string; className?: string }) => <RevealText as="div" text={text} className={`font-display text-5xl leading-[.95] md:text-7xl ${className}`} />;
+export const H2 = ({ text, className = "" }: { text: string; className?: string }) => <RevealText as="div" text={text} className={`h-sec text-4xl md:text-6xl ${className}`} />;
 export const Tag = ({ children }: { children: React.ReactNode }) => <p className="eyebrow mb-4">{children}</p>;
 export function CtaBand({ title, sub }: { title?: string; sub?: string }) {
   const tr = useTr(); const { cta, hero, nav } = useContent();
-  return <section className="dark-sec relative overflow-hidden px-6 pb-16 pt-24"><div className="pointer-events-none absolute -right-40 -top-40 size-[520px] rounded-full bg-sage/25 blur-3xl" /><div className="relative mx-auto max-w-6xl"><h2 className="font-display text-[clamp(64px,15vw,200px)] leading-[.9]">{title ?? tr(cta.title)}</h2><p className="soft mt-4 max-w-md">{sub ?? tr(cta.sub)}</p>
-    <div className="mt-8 flex flex-wrap items-center gap-4"><Magnetic><Link href="/book" className="btn btn-light">{tr(hero.primary)} <ArrowRight size={16} /></Link></Magnetic><Link href="/quote" className="btn border border-white/30 bg-transparent text-white hover:bg-white/10">{tr(nav.quote)}</Link><a href={`mailto:${EMAIL}`} className="font-semibold underline">{EMAIL}</a></div></div></section>;
+  return <section className="mesh px-6 py-28 text-center"><div className="mx-auto max-w-4xl"><h2 className="h-sec text-5xl sm:text-7xl">{title ?? "Pick, customize, deliver. It's that easy."}</h2><p className="mx-auto mt-5 max-w-xl text-lg text-white/80">{sub ?? tr(cta.sub)}</p>
+    <div className="mt-9 flex flex-wrap items-center justify-center gap-4"><Magnetic><Link href="/book" className="btn btn-light">{tr(hero.primary)} <ArrowRight size={16} /></Link></Magnetic><Link href="/quote" className="btn border border-white/40 bg-transparent text-white hover:bg-white/10">{tr(nav.quote)}</Link></div><a href={`mailto:${EMAIL}`} className="mt-6 inline-block text-sm text-white/80 underline">{EMAIL}</a></div></section>;
 }
 export function ServiceRows({ group = "core" }: { group?: "core" | "care" }) {
   const tr = useTr(); const { services } = useContent();

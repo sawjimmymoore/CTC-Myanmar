@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient, createAdminClient } from "@/lib/supabase/server";
 import * as defaults from "@/content/site-content";
-import { SECTION_KEYS } from "@/lib/content-context";
+import { SECTION_KEYS } from "@/lib/content-keys";
 export async function GET(request: NextRequest) {
   const wantsPreview = request.nextUrl.searchParams.get("preview") === "1"; let allowPreview = false;
   if (wantsPreview) { const { data: { user } } = await (await createClient()).auth.getUser(); allowPreview = !!user; }

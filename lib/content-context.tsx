@@ -1,7 +1,8 @@
 "use client";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import * as defaults from "@/content/site-content";
-export const SECTION_KEYS = ["nav", "hero", "problem", "steps", "audiences", "services", "siteTypes", "platforms", "packages", "why", "about", "faq", "cta", "footer"] as const;
+import { SECTION_KEYS } from "./content-keys";
+export { SECTION_KEYS };
 export type SiteContent = Pick<typeof defaults, (typeof SECTION_KEYS)[number]>;
 const base = () => Object.fromEntries(SECTION_KEYS.map((k) => [k, (defaults as Record<string, unknown>)[k]])) as unknown as SiteContent;
 const Ctx = createContext<{ content: SiteContent; isPreview: boolean } | null>(null);
