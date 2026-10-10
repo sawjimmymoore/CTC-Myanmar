@@ -7,7 +7,7 @@ import { useContent } from "@/lib/content-context";
 const fld = "w-full rounded-xl border border-hair bg-white px-4 py-3 text-sm outline-none focus:border-sage-deep";
 function Form() {
   const q = useSearchParams(); const { services: SERVICES, packages } = useContent(); const [r, act, pending] = useActionState(sendMessage, null);
-  const [sel, setSel] = useState<string[]>([q.get("service") ? SERVICES.find((s) => s.slug === q.get("service"))?.name.en ?? "" : "", q.get("plan") ?? ""].filter(Boolean));
+  const [sel, setSel] = useState<string[]>([q.get("service") ? SERVICES.find((s) => s.slug === q.get("service"))?.name.en ?? "" : "", q.get("plan") ?? "", ...(q.get("items") ?? "").split(",")].filter(Boolean));
   const [org, setOrg] = useState(""); const [notes, setNotes] = useState("");
   const opts = [...SERVICES.map((s) => s.name.en), ...packages.families.flatMap((f) => f.tiers.map((t) => t.name.en))];
   const tog = (o: string) => setSel((s) => s.includes(o) ? s.filter((x) => x !== o) : [...s, o]);

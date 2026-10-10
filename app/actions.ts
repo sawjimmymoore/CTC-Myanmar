@@ -23,3 +23,11 @@ export async function bookCall(_: Result | null, f: FormData): Promise<Result> {
   if (error) return { ok: false, message: error.code === "23505" ? "That time was just taken. Pick another slot." : "Could not book. Please email us directly." };
   return { ok: true, message: `Booked for ${date} at ${time} (Myanmar time). We will confirm by email.` };
 }
+export async function registerEvent(_: Result | null, f: FormData): Promise<Result> {
+  if (s(f, "website")) return { ok: true, message: "Thanks." };
+  const name = s(f, "name"), email = s(f, "email"), event_id = s(f, "event_id");
+  if (!name || !/^\S+@\S+\.\S+$/.test(email) || !event_id) return { ok: false, message: "Add your name and a valid email." };
+  const db = publicClient(); if (!db) return { ok: false, message: "Registration is not connected yet. Email us directly." };
+  const { error } = await db.from("event_registrations").insert({ event_id, name, email, phone: s(f, "phone"), organization: s(f, "organization") });
+  return error ? { ok: false, message: "Could not register. Please email us directly." } : { ok: true, message: "You are registered. We will email you the details." };
+}

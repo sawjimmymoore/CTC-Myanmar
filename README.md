@@ -13,13 +13,13 @@ Next.js 16 + Tailwind 4 + Supabase. Fonts: Bebas Neue (display), Montserrat (bod
 - Authentication > Users > Add user: create your admin login, then visit /admin/login
 
 ## What is in it
-- Pages: Home, Services (+12 service pages), Who we help (4), Website types, Packages (4 families with comparison tables, no prices), How it works, About, Updates, Book, Quote, Contact, Privacy, Terms
-- English / Burmese toggle in the nav. Burmese is written for the nav, hero, About, service names and key headings. Everything else falls back to English until you fill the Burmese field in the admin. Please have a native speaker review the Burmese
-- Admin (/admin):
-  - Site content: edit hero, services, audiences, platforms, packages, steps, FAQ, About, footer, CTA in both languages, draft then publish (same system as MMG)
-  - Updates: write news, draft/publish, cover upload
-  - Bookings and Messages (quote requests arrive as messages)
-- Effects reused from your sites: Lenis smooth scroll, cursor glow, magnetic buttons, tilt cards, scroll-lit text, word reveal, marquee, motion background, FAQ accordion, cookie consent, back to top
+- Pages: Home, Services (+12 service pages with animated screen mockups), Packages (package builder: add tiers, then request one quote), Website types, How it works, About (story, mission, values, founders), Updates, Events (+ registration), Book, Quote, Contact, Privacy, Terms
+- Journey: Home hero > see it in action showcase > guided steps > Find-your-fit quiz > services > package builder > quote or free scoping call. Primary CTA is always "Book a free scoping call"; secondary is "Build your package"
+- English / Burmese toggle. Burmese is written for the nav, hero, About and key headings; the rest falls back to English until filled in the admin. Please have a native speaker review
+- Admin (/admin): Site content (hero, services, packages, steps, FAQ, About incl. founders, showcase, quiz, footer; both languages; draft then publish), Updates, Events, Registrations, Bookings, Messages
+- Founders: edit in Admin > Site content > about > founders. Entries with an empty name are hidden. Add each founder's own story text
+- Icons: app/icon.png, app/apple-icon.png, app/favicon.ico and app/opengraph-image.png are generated from the CTC logo on navy
+- Fonts: Bebas Neue (display), Montserrat (headings, body), JetBrains Mono (labels), Noto Sans Myanmar (Burmese)
 
 ## Brand
 - Colors: paper #F6F7F5, navy #162A4A (text, buttons, dark sections), logo sage #8FB08A (accents only). No gold

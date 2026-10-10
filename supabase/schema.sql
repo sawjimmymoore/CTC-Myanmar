@@ -38,3 +38,17 @@ insert into storage.buckets (id, name, public) values ('gallery', 'gallery', tru
 create policy "public views gallery" on storage.objects for select using (bucket_id = 'gallery');
 create policy "admins upload gallery" on storage.objects for insert with check (bucket_id = 'gallery' and auth.role() = 'authenticated');
 create policy "admins delete gallery" on storage.objects for delete using (bucket_id = 'gallery' and auth.role() = 'authenticated');
+
+-- Events (workshops, webinars, launches) and registrations.
+create table if not exists events (
+  id uuid primary key default gen_random_uuid(), slug text unique not null, title text not null, kind text default 'Workshop',
+  starts_at timestamptz not null, ends_at timestamptz, location text, online boolean default false, description text default '',
+  cover_url text, register_url text, published boolean not null default false, created_at timestamptz default now());
+create table if not exists event_registrations (
+  id uuid primary key default gen_random_uuid(), event_id uuid references events(id) on delete cascade, name text not null, email text not null,
+  phone text, organization text, created_at timestamptz default now());
+alter table events enable row level security; alter table event_registrations enable row level security;
+create policy "public reads published events" on events for select using (published or auth.role() = 'authenticated');
+create policy "admins write events" on events for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+create policy "public can register" on event_registrations for insert with check (true);
+create policy "admins read registrations" on event_registrations for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');

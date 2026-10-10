@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import { LayoutDashboard, Newspaper, CalendarCheck, Inbox, ExternalLink, FileText } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import SignOutButton from "./SignOutButton";
-const SECTIONS = ["hero", "services", "audiences", "platforms", "packages", "steps", "problem", "why", "about", "faq", "cta", "footer", "siteTypes", "nav"];
-const L = [["/admin", "Dashboard", LayoutDashboard], ["/admin/updates", "Updates", Newspaper], ["/admin/bookings", "Bookings", CalendarCheck], ["/admin/messages", "Messages", Inbox]] as const;
+const SECTIONS = ["hero", "services", "platforms", "packages", "steps", "problem", "why", "about", "faq", "cta", "footer", "showcase", "quiz", "siteTypes", "nav"];
+const L = [["/admin", "Dashboard", LayoutDashboard], ["/admin/updates", "Updates", Newspaper], ["/admin/events", "Events", CalendarCheck], ["/admin/registrations", "Registrations", Inbox], ["/admin/bookings", "Bookings", CalendarCheck], ["/admin/messages", "Messages", Inbox]] as const;
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
