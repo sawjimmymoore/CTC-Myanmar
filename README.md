@@ -13,13 +13,16 @@ Next.js 16 + Tailwind 4 + Supabase. Fonts: Bebas Neue (display), Montserrat (bod
 - Authentication > Users > Add user: create your admin login, then visit /admin/login
 
 ## What is in it
-- Pages: Home, Services (+12 service pages with animated screen mockups), Packages (package builder: add tiers, then request one quote), Website types, How it works, About (story, mission, values, founders), Updates, Events (+ registration), Book, Quote, Contact, Privacy, Terms
-- Journey: Home hero > see it in action showcase > guided steps > Find-your-fit quiz > services > package builder > quote or free scoping call. Primary CTA is always "Book a free scoping call"; secondary is "Build your package"
-- English / Burmese toggle. Burmese is written for the nav, hero, About and key headings; the rest falls back to English until filled in the admin. Please have a native speaker review
-- Admin (/admin): Site content (hero, services, packages, steps, FAQ, About incl. founders, showcase, quiz, footer; both languages; draft then publish), Updates, Events, Registrations, Bookings, Messages
-- Founders: edit in Admin > Site content > about > founders. Entries with an empty name are hidden. Add each founder's own story text
-- Icons: app/icon.png, app/apple-icon.png, app/favicon.ico and app/opengraph-image.png are generated from the CTC logo on navy
-- Fonts: Bebas Neue (display), Montserrat (headings, body), JetBrains Mono (labels), Noto Sans Myanmar (Burmese)
+- Six categories, each with its own page: Websites and Web Apps, Business Systems and Software, AI Workflow and Automation, Marketing and Growth, Video and Creative Production, Care/Security/Training. 58 specific services (e.g. 12 website types, 12 business systems, 12 AI set-ups)
+- Each category page: services with icons, animated screen mockup, category road map, packages and add-ons, and a project brief form with suggested questions per topic
+- Package builder (/packages): choose a category, add tiers and add-ons, then request one quote or add a brief
+- Project brief (/start): pick a category and topics, answer suggested questions, send. Arrives as a message in Admin > Messages with the subject "Brief: ..."
+- Road map (home and /how-it-works): seven stages from Discover to Care and grow, drawn as a road that fills in while you scroll
+- Journey bar: Explore > Choose > Brief > Book on every conversion page
+- Hero: animated dot-matrix backdrop, category cards, mini journey line
+- Also: Find-your-fit quiz, Events with registration, Updates, About with founders, EN/Burmese toggle, admin for all content
+- Phone: add in Admin > Site content > contact (phone, viber, telegram). It then appears in the footer and Contact page
+- Edit services, offerings, packages, add-ons, suggested questions and road maps in Admin > Site content (services, packages, roadmap)
 
 ## Brand
 - Colors: paper #F6F7F5, navy #162A4A (text, buttons, dark sections), logo sage #8FB08A (accents only). No gold

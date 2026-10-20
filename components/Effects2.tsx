@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, animate, useInView, useMotionValueEvent, useScroll } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { useTr } from "@/lib/i18n";
 import { useContent } from "@/lib/content-context";
 
@@ -35,24 +35,6 @@ export function PinnedSteps({ title }: { title?: string }) {
         <span className="eyebrow rounded border border-sage-deep/40 px-2 py-1">0{i + 1} / 0{n}</span><h3 className="h-sec mt-6 text-2xl sm:text-3xl">{tr(s.t)}</h3><p className="mt-4 max-w-sm text-soft">{tr(s.d)}</p></motion.div></AnimatePresence>
         <div className="mt-8 flex items-center gap-2">{steps.items.map((_, k) => <i key={k} className={`h-1.5 rounded-full transition-all ${k === i ? "w-10 bg-navy" : "w-4 bg-navy/20"}`} />)}<Link href="/how-it-works" className="ml-auto inline-flex items-center gap-1 text-sm font-semibold text-sage-deep">Full process <ArrowRight size={14} /></Link></div></div>
       <div className="panel-grad relative min-h-[300px] md:min-h-[420px]"><AnimatePresence mode="wait"><motion.div key={i} className="absolute inset-0" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: .4 }}><V /></motion.div></AnimatePresence></div></div></div></section>;
-}
-/* ---- Bento tiles ---- */
-export function Bento() {
-  const tr = useTr(); const { services } = useContent(); const L = services.filter((s) => ["websites", "business-systems", "marketing", "video-production", "ai-workflow", "lead-tracker", "learning-platforms"].includes(s.slug));
-  const spans = ["md:col-span-7", "md:col-span-5", "md:col-span-4", "md:col-span-4", "md:col-span-4", "md:col-span-6", "md:col-span-6"]; const skin = ["bg-navy text-white", "panel-grad text-white", "bg-sage-soft", "bg-white border border-hair", "bg-white border border-hair", "bg-sage-soft", "bg-navy text-white"];
-  return <div className="grid gap-4 md:grid-cols-12">{L.map((s, i) => <motion.div key={s.slug} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: .6, delay: (i % 3) * .08 }} className={spans[i]}>
-    <Link href={`/services/${s.slug}`} className={`group relative flex min-h-[270px] flex-col justify-between overflow-hidden rounded-3xl p-7 transition-transform duration-300 hover:-translate-y-1 ${skin[i]}`}>
-      <span className="pointer-events-none absolute -right-10 -top-10 size-44 rounded-full bg-white/10 blur-2xl transition-transform duration-500 group-hover:scale-150" />
-      <div><span className="eyebrow !text-current opacity-70">{s.tag}</span><h3 className="h-sec mt-3 text-3xl sm:text-4xl">{tr(s.name)}</h3></div>
-      <div className="flex items-end justify-between gap-4"><p className="max-w-xs text-sm opacity-80">{tr(s.blurb)}</p><span className="grid size-11 shrink-0 place-items-center rounded-full bg-white text-navy transition-transform group-hover:rotate-45"><ArrowUpRight size={18} /></span></div></Link></motion.div>)}</div>;
-}
-/* ---- Hover-expanding service rows (with sliding "Book a call" band) ---- */
-export function HoverRows({ group = "core" }: { group?: "core" | "care" }) {
-  const tr = useTr(); const { services } = useContent(); const list = services.filter((s) => s.group === group); const [a, setA] = useState<string | null>(list[0]?.slug ?? null);
-  return <div className="border-t border-navy/15">{list.map((s, i) => { const on = a === s.slug; return <div key={s.slug} onMouseEnter={() => setA(s.slug)} onClick={() => setA(s.slug)} className="border-b border-navy/15">
-    <div className="grid cursor-pointer items-center gap-4 py-6 md:grid-cols-[60px_1fr_1.1fr_40px]"><span className="eyebrow">0{i + 1}</span><h3 className={`h-sec text-2xl transition-colors sm:text-4xl ${on ? "text-navy" : "text-navy/45"}`}>{tr(s.name)}</h3><p className="text-sm text-soft">{tr(s.blurb)}</p><ArrowRight className={`hidden transition md:block ${on ? "translate-x-1 text-sage-deep" : "opacity-0"}`} /></div>
-    <AnimatePresence initial={false}>{on && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: .4, ease: [.16, 1, .3, 1] }} className="overflow-hidden"><div className="grid gap-6 pb-6 md:grid-cols-[60px_1fr_1.1fr_40px]"><span /><ul className="grid gap-2 text-sm">{s.includes.slice(0, 4).map((x, k) => <li key={k} className="flex gap-2"><Check size={16} className="mt-0.5 shrink-0 text-sage-deep" />{tr(x)}</li>)}</ul>
-      <Link href={`/book`} className="mesh group flex min-h-24 items-center justify-between rounded-2xl px-6 py-5 text-xl font-semibold">Book a call<ArrowRight className="transition group-hover:translate-x-1" /></Link><Link href={`/services/${s.slug}`} aria-label="View service" className="hidden items-center md:flex"><ArrowUpRight /></Link></div></motion.div>}</AnimatePresence></div>; })}</div>;
 }
 /* ---- Sticky stacking cards (scroll deck) ---- */
 export function StackCards() {
