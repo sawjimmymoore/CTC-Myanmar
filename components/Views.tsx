@@ -10,7 +10,7 @@ import TiltCard from "./TiltCard";
 import ScrollTextHighlight from "./effects/ScrollTextHighlight";
 import FaqAccordion from "./FaqAccordion";
 import { StackCards, CountUp } from "./Effects2";
-import { DotMatrix, HeroCards, HeroJourney } from "./DotHero";
+import { DotMatrix, HeroTiles, HeroJourney } from "./DotHero";
 import { JourneyRoad, JourneyBar, CategoryRoad } from "./Journey";
 import IntakeForm from "./Brief";
 import { Ic } from "./Icons";
@@ -30,13 +30,12 @@ export function HomeView({ posts, events }: { posts: Post[]; events: Ev[] }) {
   const tr = useTr(); const c = useContent(); const { hero } = c; const [hk, setHk] = useState(0);
   useEffect(() => { const t = setInterval(() => setHk((x) => (x + 1) % c.problem.hooks.length), 2600); return () => clearInterval(t); }, [c.problem.hooks.length]);
   return <>
-    <section className="mesh relative overflow-hidden px-6 pb-16 pt-32 lg:pt-36"><DotMatrix className="opacity-70" />
-      <div className="relative mx-auto grid max-w-[1180px] items-center gap-10 lg:grid-cols-[1.15fr_1fr]"><div><p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs backdrop-blur"><i className="size-2 rounded-full bg-sage" />{tr(hero.badge)}</p>
-        <h1 className="font-display text-[clamp(44px,6.6vw,104px)] leading-[.95]"><Words text={tr(hero.line1)} /><br /><Words text={tr(hero.line2)} base={4} /></h1>
+    <section className="mesh relative flex min-h-[92svh] flex-col justify-end overflow-hidden px-6 pb-12 pt-32"><DotMatrix className="opacity-80" />
+      <div className="relative mx-auto w-full max-w-[1180px]"><p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs backdrop-blur"><i className="size-2 rounded-full bg-sage" />{tr(hero.badge)}</p>
+        <h1 className="font-display text-[clamp(44px,7.2vw,112px)] leading-[.95]"><Words text={tr(hero.line1)} /><br /><Words text={tr(hero.line2)} base={4} /></h1>
         <p className="mt-5 max-w-lg text-base text-white/85 sm:text-lg">{tr(hero.sub)}</p>
         <div className="mt-7 flex flex-wrap gap-3"><Magnetic><Link href="/book" className="btn btn-light">{tr(hero.primary)} <ChevronsRight size={16} /></Link></Magnetic><Link href="/start" className="btn border border-white/40 bg-transparent text-white hover:bg-white/10">{tr(hero.secondary)}</Link></div>
-        <HeroJourney /><p className="mt-6 text-sm text-white/80">{tr(hero.note)}</p></div>
-      <HeroCards /></div></section>
+        <HeroJourney /><p className="mt-6 text-sm text-white/80">{tr(hero.note)}</p></div><HeroTiles /></section>
     <div className="border-b border-hair bg-white py-4"><p className="eyebrow mb-2 text-center">What we build, set up and look after</p><Marquee items={hero.marquee} className="py-1" /></div>
     <Sec><div className="mx-auto max-w-3xl text-center"><Tag>{tr(c.problem.tag)}</Tag><div className="h-sec relative h-32 overflow-hidden text-3xl text-navy sm:h-24 md:h-28 md:text-4xl"><AnimatePresence mode="wait"><motion.p key={hk} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -40, opacity: 0 }} transition={{ duration: .45 }} className="absolute inset-x-0">{tr(c.problem.hooks[hk])}</motion.p></AnimatePresence></div>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-soft">{tr(c.problem.text)}</p></div>
