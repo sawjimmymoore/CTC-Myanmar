@@ -1,33 +1,38 @@
 "use server";
 import { publicClient } from "@/lib/supabase/public";
+import { lookupEventTitle, notify, store } from "@/lib/submit";
 export type Result = { ok: boolean; message: string };
-const s = (f: FormData, k: string) => String(f.get(k) ?? "").trim().slice(0, 2000);
+const s = (f: FormData, k: string) => String(f.get(k) ?? "").trim().slice(0, 4000);
+const FAIL = "We could not send this right now. Please email info@ctcmyanmar.com and we will help.";
 export async function slotsFor(date: string): Promise<string[]> {
   const db = publicClient(); if (!db || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return [];
   const { data } = await db.rpc("taken_slots", { d: date }); return (data as string[]) ?? [];
 }
 export async function sendMessage(_: Result | null, f: FormData): Promise<Result> {
   if (s(f, "website")) return { ok: true, message: "Thanks." };
-  const name = s(f, "name"), email = s(f, "email"), message = s(f, "message");
+  const name = s(f, "name"), email = s(f, "email"), message = s(f, "message"), subject = s(f, "subject");
   if (!name || !/^\S+@\S+\.\S+$/.test(email) || !message) return { ok: false, message: "Add your name, a valid email and a message." };
-  const db = publicClient(); if (!db) return { ok: false, message: "The form is not connected yet. Email us directly." };
-  const { error } = await db.from("contact_messages").insert({ name, email, subject: s(f, "subject"), message });
-  return error ? { ok: false, message: "Could not send. Please email us directly." } : { ok: true, message: "Message sent. We reply within 2 working days." };
+  const saved = await store("contact_messages", { name, email, subject, message });
+  const kind = subject || "Contact message";
+  const mailed = await notify({ kind: `New message: ${kind}`, email, name, fields: [["Name", name], ["Email", email], ["Subject", kind], ["Message", message]], confirmSubject: "We received your message - Click to Create", confirmIntro: "Thank you for contacting Click to Create. We have your message and will get back to you soon.", confirmFields: [["Subject", kind]] });
+  return saved.ok || mailed ? { ok: true, message: "Message sent. We reply within 2 working days." } : { ok: false, message: FAIL };
 }
 export async function bookCall(_: Result | null, f: FormData): Promise<Result> {
   if (s(f, "website")) return { ok: true, message: "Thanks." };
-  const name = s(f, "name"), email = s(f, "email"), date = s(f, "date"), time = s(f, "time");
+  const name = s(f, "name"), email = s(f, "email"), date = s(f, "date"), time = s(f, "time"), phone = s(f, "phone"), organization = s(f, "organization"), service = s(f, "service"), notes = s(f, "notes");
   if (!name || !/^\S+@\S+\.\S+$/.test(email) || !date || !time) return { ok: false, message: "Add your name, email, a date and a time." };
-  const db = publicClient(); if (!db) return { ok: false, message: "Booking is not connected yet. Email us directly." };
-  const { error } = await db.from("bookings").insert({ name, email, phone: s(f, "phone"), organization: s(f, "organization"), service: s(f, "service"), notes: s(f, "notes"), date, time });
-  if (error) return { ok: false, message: error.code === "23505" ? "That time was just taken. Pick another slot." : "Could not book. Please email us directly." };
-  return { ok: true, message: `Booked for ${date} at ${time} (Myanmar time). We will confirm by email.` };
+  const saved = await store("bookings", { name, email, phone, organization, service, notes, date, time });
+  if (saved.code === "23505") return { ok: false, message: "That time was just taken. Pick another slot." };
+  const when = `${date} at ${time} (Myanmar time)`;
+  const mailed = await notify({ kind: `New booking: ${date} ${time} - ${name}`, email, name, fields: [["When", when], ["Name", name], ["Email", email], ["Phone", phone], ["Organization", organization], ["Interested in", service], ["Notes", notes]], confirmSubject: `Your free scoping call request: ${date} ${time}`, confirmIntro: "Thank you for booking a free 30-minute scoping call. We have your request and will confirm the time by email.", confirmFields: [["When", when], ["Interested in", service]] });
+  return saved.ok || mailed ? { ok: true, message: `Booked for ${when}. We will confirm by email.` } : { ok: false, message: FAIL };
 }
 export async function registerEvent(_: Result | null, f: FormData): Promise<Result> {
   if (s(f, "website")) return { ok: true, message: "Thanks." };
-  const name = s(f, "name"), email = s(f, "email"), event_id = s(f, "event_id");
+  const name = s(f, "name"), email = s(f, "email"), event_id = s(f, "event_id"), phone = s(f, "phone"), organization = s(f, "organization");
   if (!name || !/^\S+@\S+\.\S+$/.test(email) || !event_id) return { ok: false, message: "Add your name and a valid email." };
-  const db = publicClient(); if (!db) return { ok: false, message: "Registration is not connected yet. Email us directly." };
-  const { error } = await db.from("event_registrations").insert({ event_id, name, email, phone: s(f, "phone"), organization: s(f, "organization") });
-  return error ? { ok: false, message: "Could not register. Please email us directly." } : { ok: true, message: "You are registered. We will email you the details." };
+  const saved = await store("event_registrations", { event_id, name, email, phone, organization });
+  const title = await lookupEventTitle(event_id);
+  const mailed = await notify({ kind: `Event registration: ${title || "event"} - ${name}`, email, name, fields: [["Event", title], ["Name", name], ["Email", email], ["Phone", phone], ["Organization", organization]], confirmSubject: `You are registered${title ? `: ${title}` : ""}`, confirmIntro: "Thank you for registering. We will email you the details before the event.", confirmFields: [["Event", title]] });
+  return saved.ok || mailed ? { ok: true, message: "You are registered. We will email you the details." } : { ok: false, message: FAIL };
 }

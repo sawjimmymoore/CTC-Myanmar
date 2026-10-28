@@ -28,6 +28,14 @@ Next.js 16 + Tailwind 4 + Supabase. Fonts: Bebas Neue (display), Montserrat (bod
 - Colors: paper #F6F7F5, navy #162A4A (text, buttons, dark sections), logo sage #8FB08A (accents only). No gold
 - Logo files: public/assets/logo-mark.png (nav, favicon) and logo-full.png (footer)
 
+
+## Form emails and the admin inbox
+- Every form (contact, project brief, quote, booking, event registration) saves to Supabase (see it in /admin: Messages, Bookings, Registrations) and emails info@ctcmyanmar.com. Replying to that email replies straight to the customer
+- If an email key is set, the customer also gets a confirmation. Set SEND_CONFIRMATIONS=false to turn confirmations off
+- If Supabase is unavailable but email works, the form still succeeds (the team gets the email). If both fail the visitor sees "please email info@ctcmyanmar.com"
+- Setup check: open /api/health. It shows yes/no for each setting and whether each database table exists (never any secret values)
+- Email uses Resend (https://resend.com): add the domain ctcmyanmar.com, add the DNS records it shows, create an API key, then set RESEND_API_KEY and MAIL_FROM in the host's environment variables
+
 ## Deploy
 - Push to GitHub, import in Vercel, add the env vars, point ctcmyanmar.com at it
 
