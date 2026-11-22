@@ -1,4 +1,5 @@
 "use client";
+import { Localized } from "@/lib/i18n";
 // A continuously scrolling horizontal ticker, the "marquee strip" pattern
 // (skills, taglines, status) seen across motion-driven agency sites.
 export default function Marquee({
@@ -23,7 +24,7 @@ export default function Marquee({
             {loop.map((item, i) => (
               <span key={`${copy}-${i}`} className="flex items-center flex-shrink-0">
                 <span className="px-6 text-[13px] md:text-[14px] font-medium uppercase tracking-[0.15em] text-parchment-100/70 whitespace-nowrap">
-                  {item}
+                  <Localized>{item}</Localized>
                 </span>
                 <span className="h-1.5 w-1.5 rounded-full bg-primary-500/50 flex-shrink-0" />
               </span>

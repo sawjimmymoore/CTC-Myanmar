@@ -1,0 +1,32 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Standalone Node test runner. */
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const ts = require('typescript');
+// Run against the actual bundled content, without requiring a browser or database.
+require.extensions['.ts'] = (module, file) => module._compile(ts.transpile(fs.readFileSync(file, 'utf8'), { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 }), file);
+const content = require('../content/site-content.ts');
+const { MY_COPY } = require('../content/myanmar.ts');
+const { formatDate } = require('../lib/date-format.ts');
+const retained = new Set(['6', '58', '100%', 'QuickBooks', 'Zoho Books', 'Odoo']);
+let fields = 0;
+function inspect(value, location = 'content') {
+  if (!value || typeof value !== 'object') return;
+  if (typeof value.en === 'string') {
+    if (value.en && !retained.has(value.en)) {
+      assert.match(value.my, /[\u1000-\u109f]/, `Missing Burmese copy: ${location}: ${value.en}`);
+      fields++;
+    }
+    return;
+  }
+  for (const [key, item] of Object.entries(value)) inspect(item, `${location}.${key}`);
+}
+inspect(content);
+assert.equal(content.services.reduce((total, s) => total + s.offerings.length, 0), 58);
+assert.ok(fields > 800, `Expected complete long-form copy, found ${fields} fields`);
+for (const message of ['Sending...', 'Booking...', 'Saving...', 'Message sent. We reply within 2 working days.', 'That time was just taken. Pick another slot.', 'We could not send this right now. Please email info@ctcmyanmar.com and we will help.']) {
+  assert.match(MY_COPY[message], /[\u1000-\u109f]/, `Missing form feedback: ${message}`);
+}
+assert.match(formatDate('2026-11-23T00:00:00+06:30', 'my', { weekday: 'short', day: 'numeric', month: 'short' }), /^တနင်္လာ,? ၂၃ နိုဝင်ဘာ$/);
+assert.equal(formatDate('2026-11-22T20:00:00Z', 'my', { day: 'numeric' }), '၂၃');
+assert.match(formatDate('2026-11-23T00:00:00+06:30', 'en', { weekday: 'short', day: 'numeric', month: 'short' }), /^Mon,? 23 Nov$/);
+console.log(`Verified ${fields} bilingual content fields, ${Object.keys(MY_COPY).length} translations, all 58 services, form feedback, and Myanmar-time dates.`);

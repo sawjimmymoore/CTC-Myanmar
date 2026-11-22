@@ -1,7 +1,8 @@
 // Editable site content. English is the source; Burmese (my) falls back to English when empty.
 // Anything here can be edited from /admin > Content, with draft and publish.
+import { MY_COPY } from "./myanmar";
 export interface Bi { en: string; my: string }
-const b = (en: string, my = ""): Bi => ({ en, my });
+const b = (en: string, my = ""): Bi => ({ en, my: MY_COPY[en] ?? my });
 export const EMAIL = "info@ctcmyanmar.com";
 
 export const nav = { services: b("Services", "ဝန်ဆောင်မှုများ"), who: b("Who we help", "ဘယ်သူတွေအတွက်"), packages: b("Packages", "ပက်ကေ့ချ်များ"), how: b("How it works", "အလုပ်လုပ်ပုံ"), updates: b("Updates", "သတင်းများ"), about: b("About", "ကျွန်ုပ်တို့အကြောင်း"), book: b("Book a free call", "အခမဲ့ ဆွေးနွေးရန်"), quote: b("Get a quote", "စျေးနှုန်းတောင်းရန်") };

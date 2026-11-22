@@ -1,4 +1,5 @@
 "use client";
+import { Localized } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -46,26 +47,18 @@ export default function CookieConsent() {
         transition={{ duration: 0.3 }}
         className="fixed left-3 right-3 bottom-20 md:bottom-4 md:left-auto md:right-4 md:max-w-sm z-40 rounded-2xl border border-primary-500/15 bg-header-bg/95 backdrop-blur-md text-header-text shadow-[0_12px_40px_rgba(0,0,0,0.25)] p-4 md:p-5"
       >
-        <p className="text-[13px] leading-relaxed text-header-text/85">
-          This site uses essential cookies and basic analytics to understand traffic. No data is sold or
-          shared for marketing.{" "}
-          <Link to="/privacy" className="underline underline-offset-2 hover:text-primary-500">
-            Privacy Policy
-          </Link>
+        <p className="text-[13px] leading-relaxed text-header-text/85"><Localized>{" This site uses essential cookies and basic analytics to understand traffic. No data is sold or shared for marketing."}</Localized><Localized>{" "}</Localized>
+          <Link to="/privacy" className="underline underline-offset-2 hover:text-primary-500"><Localized>{" Privacy Policy "}</Localized></Link>
         </p>
         <div className="mt-3 flex gap-2">
           <button
             onClick={() => choose("declined")}
             className="flex-1 rounded-full border border-primary-500/25 px-3.5 py-2 text-[12.5px] font-semibold hover:bg-primary-500/10 transition-colors"
-          >
-            Decline
-          </button>
+          ><Localized>{" Decline "}</Localized></button>
           <button
             onClick={() => choose("accepted")}
             className="flex-1 rounded-full bg-ink-900 text-white px-3.5 py-2 text-[12.5px] font-semibold hover:bg-primary-500 transition-colors"
-          >
-            Accept
-          </button>
+          ><Localized>{" Accept "}</Localized></button>
         </div>
       </motion.div>
     </AnimatePresence>

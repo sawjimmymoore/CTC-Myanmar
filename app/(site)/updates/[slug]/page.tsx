@@ -1,3 +1,4 @@
+import { LocalDate, Localized } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { publicClient } from "@/lib/supabase/public";
@@ -8,6 +9,6 @@ async function get(slug: string) { const db = publicClient(); if (!db) return nu
 export async function generateMetadata({ params }: P) { const p = await get((await params).slug); return { title: p?.title ?? "Update", description: p?.excerpt }; }
 export default async function Post({ params }: P) {
   const p = await get((await params).slug); if (!p) notFound();
-  return <article className="mx-auto max-w-3xl px-6 pb-28 pt-36"><Link href="/updates" className="text-sm text-sage-deep-deep">Back to updates</Link><small className="mt-8 block text-sage-deep-deep">{p.category} - {new Date(p.published_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</small>
-    <h1 className="mb-8 mt-2 font-display text-6xl leading-[.95] md:text-7xl">{p.title}</h1>{p.cover_url && /* eslint-disable-next-line @next/next/no-img-element */ <img src={p.cover_url} alt="" className="mb-10 w-full rounded-3xl" />}<Body text={p.body} /></article>;
+  return <article className="mx-auto max-w-3xl px-6 pb-28 pt-36"><Link href="/updates" className="text-sm text-sage-deep-deep"><Localized>{"Back to updates"}</Localized></Link><small className="mt-8 block text-sage-deep-deep"><Localized>{p.category}</Localized><Localized>{" - "}</Localized><LocalDate value={p.published_at} options={{ day: "numeric", month: "long", year: "numeric" }} /></small>
+    <h1 className="mb-8 mt-2 font-display text-6xl leading-[.95] md:text-7xl"><Localized>{p.title}</Localized></h1>{p.cover_url && /* eslint-disable-next-line @next/next/no-img-element */ <img src={p.cover_url} alt="" className="mb-10 w-full rounded-3xl" />}<Body text={p.body} /></article>;
 }
