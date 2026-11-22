@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import legacyMyanmar from "@/content/legacy-myanmar.json";
 import { myanmar, MY_COPY } from "@/content/myanmar";
 import { formatDate } from "./date-format";
+import { plainCopy } from "./copy-style";
 export type Lang = "en" | "my";
 const Ctx = createContext<{ lang: Lang; setLang: (l: Lang) => void } | null>(null);
 export function LangProvider({ children }: { children: ReactNode }) {
@@ -15,7 +16,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
 }
 export function useLang() { const c = useContext(Ctx); if (!c) throw new Error("LangProvider missing"); return c; }
 /** Returns a function that picks the current language, falling back to English when Burmese is empty. */
-export function useTr() { const { lang } = useLang(); return (p: { en: string; my?: string } | string | undefined) => !p ? "" : typeof p === "string" ? lang === "my" ? translateText(p) : p : lang === "my" ? (!p.my || p.my === (legacyMyanmar as Record<string, string>)[p.en]) ? translateText(p.en) : p.my : p.en; }
+export function useTr() { const { lang } = useLang(); return (p: { en: string; my?: string } | string | undefined) => plainCopy(!p ? "" : typeof p === "string" ? lang === "my" ? translateText(p) : p : lang === "my" ? (!p.my || p.my === (legacyMyanmar as Record<string, string>)[p.en]) ? translateText(p.en) : p.my : p.en); }
 
 /** Stable English identifiers stay in URLs, selections and form values; only display text changes. */
 export function translateText(text: string): string {

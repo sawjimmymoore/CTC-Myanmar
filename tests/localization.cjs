@@ -7,6 +7,11 @@ require.extensions['.ts'] = (module, file) => module._compile(ts.transpile(fs.re
 const content = require('../content/site-content.ts');
 const { MY_COPY } = require('../content/myanmar.ts');
 const { formatDate } = require('../lib/date-format.ts');
+const { plainCopy } = require('../lib/copy-style.ts');
+assert.equal(plainCopy('Step 1 - Choose'), 'Step 1: Choose');
+assert.equal(plainCopy('Your website — built for you'), 'Your website: built for you');
+assert.equal(plainCopy('E-commerce and role-based access'), 'E-commerce and role-based access');
+assert.equal(plainCopy('https://ctc-myanmar.vercel.app'), 'https://ctc-myanmar.vercel.app');
 const retained = new Set(['6', '58', '100%', 'QuickBooks', 'Zoho Books', 'Odoo']);
 let fields = 0;
 function inspect(value, location = 'content') {

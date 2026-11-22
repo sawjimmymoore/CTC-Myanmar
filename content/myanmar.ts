@@ -139,7 +139,7 @@ Members-only content|အသင်းဝင်များအတွက် သီ�
 Event registration|ပွဲတက်ရောက်ရန် စာရင်းသွင်းမှု
 Company profile|ကုမ္ပဏီမိတ်ဆက်
 What does your business do, and who are your customers?|သင့်လုပ်ငန်းက ဘာလုပ်သလဲ။ Customer တွေက ဘယ်သူတွေလဲ။
-Which pages do you need (About, Services, Team, Careers)?|ဘယ်စာမျက်နှာတွေ လိုပါသလဲ။ ဥပမာ—လုပ်ငန်းအကြောင်း၊ ဝန်ဆောင်မှု၊ အဖွဲ့၊ အလုပ်အကိုင်။
+Which pages do you need (About, Services, Team, Careers)?|ဘယ်စာမျက်နှာတွေ လိုပါသလဲ။ ဥပမာ: လုပ်ငန်းအကြောင်း၊ ဝန်ဆောင်မှု၊ အဖွဲ့၊ အလုပ်အကိုင်။
 Do you need Burmese and English?|မြန်မာ၊ အင်္ဂလိပ် နှစ်ဘာသာ လိုပါသလား။
 Which websites do you like, and why?|ကြိုက်နှစ်သက်တဲ့ Website တွေရှိရင် ဘာကြောင့်ကြိုက်လဲ ပြောပြပါ။
 What do you sell, and roughly how many products?|ဘာပစ္စည်းရောင်းသလဲ။ ကုန်ပစ္စည်းအမျိုးအစား ဘယ်လောက်ခန့်ရှိပါသလဲ။
@@ -721,7 +721,7 @@ Data import, user guide and training|Data ပြောင်းထည့်ခ�
 Operations and Approvals Suite|လုပ်ငန်းလည်ပတ်မှုနှင့် အတည်ပြုမှုစနစ်
 Purchasing, approvals, HR and inventory together|ဝယ်ယူမှု၊ အတည်ပြုမှု၊ HR နဲ့ ကုန်လက်ကျန်ကို တစ်နေရာတည်း စီမံခြင်း
 Purchase requests and tiered approval limits (LOA)|ဝယ်ယူခွင့်တောင်းဆိုမှုနဲ့ အဆင့်လိုက်အတည်ပြုခွင့်ပမာဏ (LOA)
-HR: employees, time off, expenses|HR—ဝန်ထမ်း၊ ခွင့်နဲ့ အသုံးစရိတ်
+HR: employees, time off, expenses|HR: ဝန်ထမ်း၊ ခွင့်နဲ့ အသုံးစရိတ်
 Role-based training and go-live support|တာဝန်အလိုက် သင်တန်းနဲ့ စတင်အသုံးပြုချိန် အကူအညီ
 Custom Internal Tools|စိတ်ကြိုက်လုပ်ငန်းတွင်း Tool များ
 Workflows no standard tool fits|ပုံမှန် Tool တွေနဲ့ မကိုက်သောအလုပ်စဉ်များ
@@ -878,11 +878,11 @@ Founder, websites and software|တည်ထောင်သူ၊ Website နှ�
 Born in Myanmar and based in Bangkok, Jim studied computer science and works across development and marketing. He leads CTC's website and software work.|မြန်မာနိုင်ငံမှာ မွေးဖွားပြီး ဘန်ကောက်မှာ အခြေစိုက်တဲ့ Jim က Computer Science ကို လေ့လာထားပြီး Development နဲ့ Marketing နှစ်ဖက်လုံးမှာ လုပ်ကိုင်ပါတယ်။ CTC ရဲ့ Website နဲ့ Software အပိုင်းကို ဦးဆောင်နေပါတယ်။
 Add Jim's story in his own words from Admin > Site content > about.|Jim ရဲ့ ကိုယ်ပိုင်အတွေ့အကြုံအကြောင်းကို မကြာမီ မျှဝေပေးပါမယ်။
 What we offer|ပေးနေသောဝန်ဆောင်မှုများ
-Digital marketing: campaigns, content writing and calendars, video editing, brand content strategy|Digital marketing—Campaign၊ Content ရေးသားမှုနဲ့ အချိန်ဇယား၊ ဗီဒီယိုတည်းဖြတ်မှုနဲ့ Brand content မဟာဗျူဟာ
-Video production: social ad videos, personal branding, short films|ဗီဒီယိုထုတ်လုပ်မှု—Social ကြော်ငြာ၊ ကိုယ်ပိုင် Brand နဲ့ ရုပ်ရှင်တိုများ
-Websites and software: organization, business, e-commerce and school sites, finance dashboards, HR software, domain email|Website နှင့် Software—အဖွဲ့အစည်း၊ လုပ်ငန်း၊ အွန်လိုင်းအရောင်းနဲ့ ကျောင်း Website များ၊ ဘဏ္ဍာရေး Dashboard၊ HR Software နဲ့ Domain email
-Business systems: QuickBooks, Zoho Books, Odoo or custom-coded internal tools|လုပ်ငန်းစနစ်—QuickBooks၊ Zoho Books၊ Odoo သို့မဟုတ် စိတ်ကြိုက်လုပ်ငန်းတွင်း Tool များ
-AI workflow: custom AI workflow setup|AI workflow—သင့်လုပ်ငန်းအတွက် AI အလုပ်စဉ် ပြင်ဆင်ပေးခြင်း
+Digital marketing: campaigns, content writing and calendars, video editing, brand content strategy|Digital marketing: Campaign၊ Content ရေးသားမှုနဲ့ အချိန်ဇယား၊ ဗီဒီယိုတည်းဖြတ်မှုနဲ့ Brand content မဟာဗျူဟာ
+Video production: social ad videos, personal branding, short films|ဗီဒီယိုထုတ်လုပ်မှု: Social ကြော်ငြာ၊ ကိုယ်ပိုင် Brand နဲ့ ရုပ်ရှင်တိုများ
+Websites and software: organization, business, e-commerce and school sites, finance dashboards, HR software, domain email|Website နှင့် Software: အဖွဲ့အစည်း၊ လုပ်ငန်း၊ အွန်လိုင်းအရောင်းနဲ့ ကျောင်း Website များ၊ ဘဏ္ဍာရေး Dashboard၊ HR Software နဲ့ Domain email
+Business systems: QuickBooks, Zoho Books, Odoo or custom-coded internal tools|လုပ်ငန်းစနစ်: QuickBooks၊ Zoho Books၊ Odoo သို့မဟုတ် စိတ်ကြိုက်လုပ်ငန်းတွင်း Tool များ
+AI workflow: custom AI workflow setup|AI workflow: သင့်လုပ်ငန်းအတွက် AI အလုပ်စဉ် ပြင်ဆင်ပေးခြင်း
 How our work looks|ကျွန်ုပ်တို့ရဲ့ ဖန်တီးမှုဟန်
 Natural and authentic video. High quality, bright and clean. People-focused, product-focused and creative.|သဘာဝကျပြီး ဟန်မဆောင်တဲ့ ဗီဒီယိုဟန်။ ကြည်လင်သန့်ရှင်းတဲ့ အရည်အသွေးနဲ့ လူ၊ ကုန်ပစ္စည်းတို့ကို ဖန်တီးမှုရှိရှိ အဓိကထားတင်ဆက်ပါတယ်။
 How much does it cost?|ဘယ်လောက်ကုန်ကျမလဲ။
@@ -1003,12 +1003,12 @@ Monthly check-in and new ideas.|လစဉ်ပြန်ဆွေးနွေး
 Maintenance, security, updates and support.|ထိန်းသိမ်းမှု၊ လုံခြုံရေး၊ ပြင်ဆင်မှုနဲ့ ကူညီပံ့ပိုးမှု။
 Steady growth with one team to call.|ဆက်သွယ်စရာအဖွဲ့တစ်ဖွဲ့တည်းနဲ့ ရေရှည်တိုးတက်နိုင်ခြင်း။
 What we build, set up and look after|တည်ဆောက်၊ တပ်ဆင်၊ ထိန်းသိမ်းပေးနေသော ဝန်ဆောင်မှုများ
-Step 1 - Choose|အဆင့် ၁ — ရွေးချယ်ပါ
+Step 1 - Choose|အဆင့် ၁: ရွေးချယ်ပါ
 What do you need? Pick a category.|ဘာလိုအပ်ပါသလဲ။ ဝန်ဆောင်မှုကဏ္ဍတစ်ခု ရွေးပါ။
 See it in action|လက်တွေ့အသုံးပြုပုံ ကြည့်ပါ
 What your business gets, on screen.|သင့်လုပ်ငန်းအတွက် စနစ်တွေ ဘယ်လိုအလုပ်လုပ်မလဲ။
 Not sure yet?|မသေချာသေးဘူးလား။
-Step 2 - Package|အဆင့် ၂ — ပက်ကေ့ချ်ရွေးပါ
+Step 2 - Package|အဆင့် ၂: ပက်ကေ့ချ်ရွေးပါ
 Build your package|သင့်ပက်ကေ့ချ် စီစဉ်ရန်
 Build package|ပက်ကေ့ချ် စီစဉ်ရန်
 Why teams choose CTC|အဖွဲ့တွေ CTC ကို ဘာကြောင့်ရွေးလဲ
@@ -1027,7 +1027,7 @@ Everything your business needs, in six categories.|သင့်လုပ်င�
 Pick a category, see every service inside it, then build a package or send a brief.|ကဏ္ဍတစ်ခုရွေးပြီး ဝန်ဆောင်မှုအသေးစိတ် ကြည့်ပါ။ ပြီးရင် ပက်ကေ့ချ်စီစဉ်ပါ၊ ဒါမှမဟုတ် လိုအပ်ချက် ပို့ပေးပါ။
 Search all services|ဝန်ဆောင်မှုအားလုံး ရှာရန်
 Looking for something specific?|သီးသန့်လိုအပ်ချက်တစ်ခု ရှာနေပါသလား။
-Try: inventory, e-commerce, Telegram, QuickBooks...|ဥပမာ—ကုန်လက်ကျန်၊ အွန်လိုင်းအရောင်း၊ Telegram၊ QuickBooks…
+Try: inventory, e-commerce, Telegram, QuickBooks...|ဥပမာ: ကုန်လက်ကျန်၊ အွန်လိုင်းအရောင်း၊ Telegram၊ QuickBooks…
 No match.|ကိုက်ညီသောရလဒ် မတွေ့ပါ။
 Tell us what you need|သင့်လိုအပ်ချက်ကို ပြောပြပါ
 and we will find the right fit.|သင့်အတွက် ကိုက်ညီတာကို ရှာဖွေပေးပါမယ်။
@@ -1038,7 +1038,7 @@ Service not found|ဒီဝန်ဆောင်မှုကို မတွေ�
 Start your brief|လိုအပ်ချက် စတင်ရေးရန်
 See packages|ပက်ကေ့ချ်များ ကြည့်ရန်
 Choose what fits. Mix as you like.|ကိုက်ညီတာ ရွေးပြီး လိုအပ်သလို ပေါင်းစပ်ပါ။
-Best for:|သင့်တော်သောလုပ်ငန်းများ—
+Best for:|သင့်တော်သောလုပ်ငန်းများ:
 Included in every project|Project တိုင်းမှာ ပါဝင်သောအရာများ
 Best for|သင့်တော်သောလုပ်ငန်းများ
 Strengths|အားသာချက်များ
@@ -1046,7 +1046,7 @@ Consider|စဉ်းစားရန်အချက်များ
 Five steps from brief to launch.|လိုအပ်ချက်ပေးချိန်ကနေ စတင်အသုံးပြုချိန်အထိ အဆင့် ၅ ဆင့်။
 Packages and add-ons|ပက်ကေ့ချ်နှင့် ထပ်ဆောင်းဝန်ဆောင်မှုများ
 Open the package builder|ပက်ကေ့ချ် စီစဉ်ရန်
-Step 3 - Send your brief|အဆင့် ၃ — လိုအပ်ချက် ပေးပို့ပါ
+Step 3 - Send your brief|အဆင့် ၃: လိုအပ်ချက် ပေးပို့ပါ
 Tell us about your project.|သင့် Project အကြောင်း ပြောပြပါ။
 Pick your topic and answer the suggested questions. A few words are enough. We reply within 2 working days.|အကြောင်းအရာရွေးပြီး အကြံပြုမေးခွန်းတွေ ဖြေပါ။ စကားအနည်းငယ်နဲ့ ဖြေလည်းရပါတယ်။ အလုပ်လုပ်ရက် ၂ ရက်အတွင်း ပြန်ဆက်သွယ်ပေးပါမယ်။
 Other categories|အခြားဝန်ဆောင်မှုကဏ္ဍများ
@@ -1104,12 +1104,12 @@ Just exploring|လေ့လာနေဆဲပါ
 Phone call|ဖုန်းဖြင့်
 Brief received|လိုအပ်ချက်ကို လက်ခံရရှိပါပြီ
 Next, book your free scoping call so we can confirm the details.|အသေးစိတ်အတည်ပြုနိုင်ဖို့ အခမဲ့ဆွေးနွေးချိန် စာရင်းသွင်းပါ။
-Step 1 of 3 - What is it about?|အဆင့် ၁ / ၃ — ဘာအကြောင်းလဲ။
+Step 1 of 3 - What is it about?|အဆင့် ၁ / ၃: ဘာအကြောင်းလဲ။
 Step 2 unlocked|အဆင့် ၂ ကို ဖြည့်နိုင်ပါပြီ
 Pick one or more|တစ်ခု သို့မဟုတ် တစ်ခုထက်ပို ရွေးပါ
-Step 2 of 3 - A few suggested questions (answer what you can)|အဆင့် ၂ / ၃ — အကြံပြုမေးခွန်းအနည်းငယ် (သိသလောက် ဖြေပါ)
+Step 2 of 3 - A few suggested questions (answer what you can)|အဆင့် ၂ / ၃: အကြံပြုမေးခွန်းအနည်းငယ် (သိသလောက် ဖြေပါ)
 Your answer (a few words is fine)|သင့်အဖြေ (အတိုချုပ် ဖြေလည်းရပါတယ်)
-Step 3 of 3 - How can we reach you?|အဆင့် ၃ / ၃ — ဘယ်လို ပြန်ဆက်သွယ်ရမလဲ။
+Step 3 of 3 - How can we reach you?|အဆင့် ၃ / ၃: ဘယ်လို ပြန်ဆက်သွယ်ရမလဲ။
 Your name|သင့်အမည်
 Phone or Viber (optional)|ဖုန်း သို့မဟုတ် Viber (မဖြည့်လည်းရ)
 Business or organization|လုပ်ငန်း သို့မဟုတ် အဖွဲ့အစည်း
@@ -1203,7 +1203,7 @@ Legal|မူဝါဒနှင့် စည်းကမ်းချက်မျ�
 Privacy policy|ကိုယ်ရေးအချက်အလက် မူဝါဒ
 Terms of use|အသုံးပြုမှု စည်းကမ်းချက်များ
 Starter text. Have it reviewed before launch.|ဤစာသားသည် ကနဦးမူကြမ်းဖြစ်ပြီး ပြန်လည်သုံးသပ်ရန် လိုအပ်ပါသည်။
-We collect only what you send through our forms (name, email, booking details, messages) and use it to reply and deliver services. We do not sell your data. Submissions are stored securely and viewed only by CTC staff. Email|သင် Form မှ ပေးပို့သော အမည်၊ Email၊ Booking အချက်အလက်နှင့် Message များကိုသာ စုဆောင်းပြီး ပြန်လည်ဆက်သွယ်ရန်နှင့် ဝန်ဆောင်မှုပေးရန် အသုံးပြုပါသည်။ သင့် Data ကို မရောင်းချပါ။ ပေးပို့ချက်များကို လုံခြုံစွာ သိမ်းဆည်းပြီး CTC ဝန်ထမ်းများသာ ကြည့်ရှုပါသည်။ သင့် Data ကို ကြည့်ရှုရန် သို့မဟုတ် ဖျက်ရန် တောင်းဆိုလိုပါက Email ပို့ပါ—
+We collect only what you send through our forms (name, email, booking details, messages) and use it to reply and deliver services. We do not sell your data. Submissions are stored securely and viewed only by CTC staff. Email|သင် Form မှ ပေးပို့သော အမည်၊ Email၊ Booking အချက်အလက်နှင့် Message များကိုသာ စုဆောင်းပြီး ပြန်လည်ဆက်သွယ်ရန်နှင့် ဝန်ဆောင်မှုပေးရန် အသုံးပြုပါသည်။ သင့် Data ကို မရောင်းချပါ။ ပေးပို့ချက်များကို လုံခြုံစွာ သိမ်းဆည်းပြီး CTC ဝန်ထမ်းများသာ ကြည့်ရှုပါသည်။ သင့် Data ကို ကြည့်ရှုရန် သို့မဟုတ် ဖျက်ရန် တောင်းဆိုလိုပါက Email ပို့ပါ:
 to access or delete your data.|သို့ ဆက်သွယ်နိုင်ပါသည်။
 Services are provided under a written quotation and agreement for each project. The scope in your signed quotation always applies.|Project တစ်ခုစီအတွက် စာဖြင့်ရေးသားထားသော ဈေးနှုန်းလွှာနှင့် သဘောတူညီချက်အရ ဝန်ဆောင်မှုပေးပါသည်။ လက်မှတ်ရေးထိုးထားသော ဈေးနှုန်းလွှာပါ လုပ်ငန်းအတိုင်းအတာကို အခြေခံပါသည်။
 Hero|ပင်မမိတ်ဆက်
@@ -1267,16 +1267,16 @@ Go-live|စတင်အသုံးပြုခြင်း
 Live|လည်ပတ်နေသည်
 Full process|လုပ်ဆောင်ပုံအပြည့်အစုံ
 Compare tiers|ပက်ကေ့ချ်အဆင့်များ နှိုင်းယှဉ်ရန်
-Browse all|အားလုံးကြည့်ရန် —
+Browse all|အားလုံးကြည့်ရန်:
 services|ဝန်ဆောင်မှုများ
 services in this category|ဤကဏ္ဍရှိ ဝန်ဆောင်မှုများ
-Your road map for|ဆောင်ရွက်မည့်အဆင့်များ —
+Your road map for|ဆောင်ရွက်မည့်အဆင့်များ:
 Mission|ကျွန်ုပ်တို့ရဲ့ ရည်မှန်းချက်
 What we stand for|ကျွန်ုပ်တို့ရဲ့ ရပ်တည်ချက်
 Four values we work by.|ကျွန်ုပ်တို့ လက်ကိုင်ထားတဲ့ တန်ဖိုး ၄ ခု။
 Call|ဖုန်းဆက်ရန်
 and more|နှင့် အခြားဝန်ဆောင်မှုများ
-Add-ons for|ထပ်ဆောင်းဝန်ဆောင်မှုများ —
+Add-ons for|ထပ်ဆောင်းဝန်ဆောင်မှုများ:
 Your package (|သင့်ပက်ကေ့ချ် (
 more|ခု ထပ်ရှိသည်
 Choose|ရွေးချယ်ပါ
