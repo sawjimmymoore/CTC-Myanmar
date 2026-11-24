@@ -62,6 +62,17 @@ body { font-family: var(--font-sans); background: var(--color-paper); color: var
 :lang(my) .btn { line-height: 1.8; text-align: center; justify-content: center; }
 :lang(my) .tile { line-height: 1.7; letter-spacing: 0; }
 :lang(my) .grid > * { min-width: 0; }
+:lang(th) body { font-family: Tahoma, "Noto Sans Thai", sans-serif; line-height: 1.8; }
+:lang(zh) body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; line-height: 1.8; }
+:lang(th) .font-display, :lang(zh) .font-display, :lang(th) .h-sec, :lang(zh) .h-sec { font-family: inherit !important; letter-spacing: 0; line-height: 1.5; text-transform: none; }
+:lang(th) h1.font-display, :lang(zh) h1.font-display { font-size: clamp(30px, 4.5vw, 68px) !important; line-height: 1.5 !important; }
+:lang(th) .eyebrow, :lang(zh) .eyebrow { font-family: inherit; line-height: 1.8; letter-spacing: 0; text-transform: none; }
+:lang(th) .wd, :lang(zh) .wd { overflow: visible; padding-block: .12em; }
+:lang(zh) .wd { display: inline; overflow-wrap: anywhere; }
+:lang(th) .wd, :lang(th) .wd > i, :lang(zh) .wd > i { display: inline; animation: none; transform: none; }
+:lang(th) .grid > *, :lang(zh) .grid > * { min-width: 0; }
+:lang(th) .btn, :lang(zh) .btn, :lang(th) input, :lang(zh) input, :lang(th) textarea, :lang(zh) textarea, :lang(th) select, :lang(zh) select { line-height: 1.8; }
+:lang(th) [class*="tracking-"], :lang(zh) [class*="tracking-"] { letter-spacing: 0; }
 :lang(my) input, :lang(my) select, :lang(my) textarea { line-height: 1.8; }
 :lang(my) [class*="tracking-"] { letter-spacing: 0; }
 :lang(my) .h-sec.relative.overflow-hidden { min-height: 10rem; height: auto; overflow: visible; }

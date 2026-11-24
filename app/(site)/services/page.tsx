@@ -1,3 +1,4 @@
+import { generatePageMetadata } from "@/lib/seo";
 import { ServicesView } from "@/components/Views";
-export const metadata = { title: "Services" };
+export async function generateMetadata() { return generatePageMetadata(); }
 export default function P() { return <ServicesView />; }

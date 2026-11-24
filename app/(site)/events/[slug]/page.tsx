@@ -1,6 +1,6 @@
 import { LocalDate, Localized } from "@/lib/i18n";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { Head } from "@/components/Site";
 import { publicClient } from "@/lib/supabase/public";
 import { Body } from "@/lib/render";

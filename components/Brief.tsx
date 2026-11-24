@@ -1,6 +1,6 @@
 "use client";
 import { Localized } from "@/lib/i18n";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { useActionState, useMemo, useState } from "react";
 import { Check } from "lucide-react";
 import { sendMessage } from "@/app/actions";

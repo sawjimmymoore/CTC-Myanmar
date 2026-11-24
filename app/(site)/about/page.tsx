@@ -1,3 +1,4 @@
+import { generatePageMetadata } from "@/lib/seo";
 import { AboutView } from "@/components/Views";
-export const metadata = { title: "About CTC" };
+export async function generateMetadata() { return generatePageMetadata(); }
 export default function P() { return <AboutView />; }

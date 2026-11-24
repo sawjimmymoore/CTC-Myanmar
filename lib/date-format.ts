@@ -1,4 +1,4 @@
-import type { Lang } from "./i18n";
+import type { Lang } from "./locales";
 
 // Some browsers omit the Myanmar ICU locale; format parts explicitly so dates
 // never silently fall back to English while the rest of the page is Burmese.
@@ -9,6 +9,7 @@ const mmDigits = (value: string) => value.replace(/\d/g, (digit) => "၀၁၂�
 export function formatDate(value: string, lang: Lang, options: Intl.DateTimeFormatOptions = {}) {
   const date = new Date(value);
   const config = { timeZone: "Asia/Yangon", ...options };
+  if (lang === "th" || lang === "zh") return new Intl.DateTimeFormat(lang === "th" ? "th-TH" : "zh-CN", { ...config, calendar: "gregory" }).format(date);
   const formatter = new Intl.DateTimeFormat("en-GB", config);
   if (lang === "en") return formatter.format(date);
   const calendar = new Intl.DateTimeFormat("en-US", { timeZone: config.timeZone, month: "numeric", weekday: "long" });

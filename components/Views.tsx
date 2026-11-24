@@ -1,6 +1,6 @@
 "use client";
 import { LocalDate, Localized } from "@/lib/i18n";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Check, ChevronsRight } from "lucide-react";
@@ -55,7 +55,7 @@ export function HomeView({ posts, events }: { posts: Post[]; events: Ev[] }) {
     <Sec tone="paper"><div className="mx-auto max-w-3xl"><H2 text="Questions we hear first." className="mb-8" /><Faq /></div></Sec>
     <CtaBand title={tr("Ready for step 3? Send your brief.")} sub="Answer a few suggested questions for your category, then book your free scoping call." /></>;
 }
-export function ServicesView() { const tr = useTr(); const { nav, services } = useContent(); const [q, setQ] = useState(""); const all = services.flatMap((s) => s.offerings.map((o) => ({ o, s }))); const hit = all.filter(({ o, s }) => (o.n.en + o.n.my + o.d.en + o.d.my + o.best.en + o.best.my + s.name.en + s.name.my + o.pts.map((p) => p.en + p.my).join(" ")).toLowerCase().includes(q.toLowerCase()));
+export function ServicesView() { const tr = useTr(); const { nav, services } = useContent(); const [q, setQ] = useState(""); const all = services.flatMap((s) => s.offerings.map((o) => ({ o, s }))); const hit = all.filter(({ o, s }) => (tr(o.n) + tr(o.d) + tr(o.best) + tr(s.name) + o.n.en + o.n.my + o.d.en + o.d.my + o.best.en + o.best.my + s.name.en + s.name.my + o.pts.map((p) => p.en + p.my).join(" ")).toLowerCase().includes(q.toLowerCase()));
   return <><Head tag={tr(nav.services)} title={tr("Everything your business needs, in six categories.")} sub="Pick a category, see every service inside it, then build a package or send a brief." /><JourneyBar at={0} />
     <Sec><CategoryCards /></Sec>
     <Sec tone="paper"><div className="mb-8 flex flex-wrap items-end justify-between gap-4"><div className="max-w-xl"><Tag><Localized>{"Search all services"}</Localized></Tag><H2 text="Looking for something specific?" /></div><input value={q} onChange={(e) => setQ(e.target.value)} placeholder={tr("Try: inventory, e-commerce, Telegram, QuickBooks...")} className="w-full max-w-md rounded-full border border-hair bg-white px-5 py-3 text-sm outline-none focus:border-sage-deep" /></div>

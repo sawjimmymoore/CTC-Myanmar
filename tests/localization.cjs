@@ -3,11 +3,39 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const ts = require('typescript');
 // Run against the actual bundled content, without requiring a browser or database.
-require.extensions['.ts'] = (module, file) => module._compile(ts.transpile(fs.readFileSync(file, 'utf8'), { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 }), file);
+require.extensions['.ts'] = (module, file) => module._compile(ts.transpile(fs.readFileSync(file, 'utf8'), { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020, esModuleInterop: true }), file);
 const content = require('../content/site-content.ts');
 const { MY_COPY } = require('../content/myanmar.ts');
 const { formatDate } = require('../lib/date-format.ts');
 const { plainCopy } = require('../lib/copy-style.ts');
+const { CATALOGS, translateText } = require('../lib/translate.ts');
+const { languageHref } = require('../lib/locales.ts');
+const { sameOrigin, validBooking, consumeRateLimit } = require('../lib/request-security.ts');
+for (const lang of ['th', 'zh']) {
+  for (const key of Object.keys(MY_COPY)) {
+    assert.ok(CATALOGS[lang][key], `Missing ${lang}: ${key}`);
+    assert.doesNotMatch(CATALOGS[lang][key], /[⟦⟧—–]/, `Invalid ${lang} copy: ${key}`);
+  }
+  assert.notEqual(translateText('Book a free call', lang), 'Book a free call');
+  assert.notEqual(translateText('Packages for Websites', lang), 'Packages for Websites');
+}
+assert.equal(languageHref('/packages?cat=care#builder', 'th'), '/packages?cat=care&lang=th#builder');
+assert.equal(languageHref('/admin/login', 'zh'), '/admin/login');
+assert.equal(languageHref('/contact?lang=zh', 'en'), '/contact');
+assert.equal(languageHref('//external.example', 'th'), '//external.example');
+assert.equal(sameOrigin('https://evil.example', 'https://ctcmyanmar.com/api/admin/content'), false);
+assert.equal(sameOrigin('https://ctcmyanmar.com', 'https://ctcmyanmar.com/api/admin/content'), true);
+assert.equal(sameOrigin(null, 'https://ctcmyanmar.com'), false);
+assert.equal(sameOrigin('http://127.0.0.1:3017', 'http://localhost:3017/api/admin/content', '127.0.0.1:3017'), true);
+const now = Date.parse('2026-11-24T00:00:00Z');
+assert.equal(validBooking('2026-11-25', '10:00', now), true);
+assert.equal(validBooking('2026-11-28', '10:00', now), false);
+assert.equal(validBooking('2026-11-25', '03:00', now), false);
+assert.equal(validBooking('2026-11-23', '10:00', now), false);
+assert.equal(validBooking('2027-02-30', '10:00', now), false);
+for (let i=0; i<5; i++) assert.equal(consumeRateLimit('test', now), true);
+assert.equal(consumeRateLimit('test', now), false);
+assert.equal(consumeRateLimit('test', now + 600001), true);
 assert.equal(plainCopy('Step 1 - Choose'), 'Step 1: Choose');
 assert.equal(plainCopy('Your website — built for you'), 'Your website: built for you');
 assert.equal(plainCopy('E-commerce and role-based access'), 'E-commerce and role-based access');
@@ -34,4 +62,4 @@ for (const message of ['Sending...', 'Booking...', 'Saving...', 'Message sent. W
 assert.match(formatDate('2026-11-23T00:00:00+06:30', 'my', { weekday: 'short', day: 'numeric', month: 'short' }), /^တနင်္လာ,? ၂၃ နိုဝင်ဘာ$/);
 assert.equal(formatDate('2026-11-22T20:00:00Z', 'my', { day: 'numeric' }), '၂၃');
 assert.match(formatDate('2026-11-23T00:00:00+06:30', 'en', { weekday: 'short', day: 'numeric', month: 'short' }), /^Mon,? 23 Nov$/);
-console.log(`Verified ${fields} bilingual content fields, ${Object.keys(MY_COPY).length} translations, all 58 services, form feedback, and Myanmar-time dates.`);
+console.log(`Verified ${fields} content fields across Burmese, Thai and Chinese; all 58 services; language URLs; form feedback; dates; origin validation; and submission throttling.`);

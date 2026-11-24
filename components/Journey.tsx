@@ -1,6 +1,6 @@
 "use client";
 import { Localized } from "@/lib/i18n";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Check } from "lucide-react";

@@ -1287,6 +1287,11 @@ Stage|အဆင့်
 of|/
 CTC logo|CTC အမှတ်တံဆိပ်
 Email info@ctcmyanmar.com directly. We reply within 2 working days.|info@ctcmyanmar.com ကို တိုက်ရိုက် Email ပို့နိုင်ပါတယ်။ အလုပ်လုပ်ရက် ၂ ရက်အတွင်း ပြန်ဆက်သွယ်ပေးပါမယ်။
+Choose language|ဘာသာစကားနှင့် နိုင်ငံ ရွေးရန်
+Too many requests. Please wait a few minutes and try again.|တောင်းဆိုမှုများနေပါသည်။ မိနစ်အနည်းငယ် စောင့်ပြီး ပြန်ကြိုးစားပေးပါ။
+That date or time is unavailable. Choose a weekday slot in Myanmar time.|ဒီရက် ဒါမှမဟုတ် အချိန်ကို မရွေးနိုင်ပါ။ မြန်မာစံတော်ချိန်အလိုက် အလုပ်လုပ်ရက်ရှိ အချိန်တစ်ခု ရွေးပေးပါ။
+This event is not available for registration.|ဒီပွဲအတွက် လက်ရှိ စာရင်းသွင်းလို့ မရပါ။
+, Online|၊ အွန်လိုင်း
 `;
 
 export const MY_COPY: Record<string, string> = Object.fromEntries(entries.trim().split("\n").map((line) => {

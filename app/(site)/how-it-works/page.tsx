@@ -1,3 +1,4 @@
+import { generatePageMetadata } from "@/lib/seo";
 import { HowView } from "@/components/Views";
-export const metadata = { title: "How it works" };
+export async function generateMetadata() { return generatePageMetadata(); }
 export default function P() { return <HowView />; }

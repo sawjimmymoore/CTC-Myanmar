@@ -1,35 +1,36 @@
 "use client";
 import { Localized } from "@/lib/i18n";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight, CalendarCheck, FileText, ChevronDown } from "lucide-react";
 import Magnetic from "./Magnetic";
 import { Ic } from "./Icons";
-import { useLang, useTr } from "@/lib/i18n";
+import { useTr } from "@/lib/i18n";
 import { useContent } from "@/lib/content-context";
+import LanguageSelect from "./LanguageSelect";
 type Key = "services" | "resources" | "company" | null;
 export default function Nav() {
   const [open, setOpen] = useState<Key>(null); const [m, setM] = useState(false); const [sc, setSc] = useState(false);
-  const { lang, setLang } = useLang(); const tr = useTr(); const { nav, services } = useContent();
+  const tr = useTr(); const { nav, services } = useContent();
   useEffect(() => { const f = () => setSc(window.scrollY > 24); f(); window.addEventListener("scroll", f, { passive: true }); return () => window.removeEventListener("scroll", f); }, []);
   const solid = sc || open !== null || m;
   const Btn = ({ k, label }: { k: Exclude<Key, null>; label: string }) => <button onMouseEnter={() => setOpen(k)} onClick={() => setOpen(open === k ? null : k)} aria-expanded={open === k} className="flex items-center gap-1 py-5 text-[15px]"><Localized>{label}</Localized><ChevronDown size={14} className={`transition ${open === k ? "rotate-180" : ""}`} /></button>;
   const L = ({ href, children }: { href: string; children: React.ReactNode }) => <Link href={href} onClick={() => setOpen(null)}><Localized>{children}</Localized></Link>;
-  const Promo = () => <div className="mesh hidden rounded-2xl p-6 lg:block"><p className="text-lg font-semibold leading-snug"><Localized>{"Ready to build something that lasts?"}</Localized></p><p className="mt-2 text-sm text-white/80"><Localized>{"Free 30-minute scoping call. Fixed written quotation."}</Localized></p><Link href="/book" onClick={() => setOpen(null)} className="btn btn-light mt-5"><Localized>{tr(nav.book)}</Localized> <ArrowRight size={15} /></Link></div>;
+  const Promo = () => <div className="mesh hidden rounded-2xl p-6 xl:block"><p className="text-lg font-semibold leading-snug"><Localized>{"Ready to build something that lasts?"}</Localized></p><p className="mt-2 text-sm text-white/80"><Localized>{"Free 30-minute scoping call. Fixed written quotation."}</Localized></p><Link href="/book" onClick={() => setOpen(null)} className="btn btn-light mt-5"><Localized>{tr(nav.book)}</Localized> <ArrowRight size={15} /></Link></div>;
   return <><header onMouseLeave={() => setOpen(null)} className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${solid ? "bg-white text-navy shadow-[0_1px_0_rgba(22,42,74,.08)]" : "bg-transparent text-white"}`}>
     <div className="mx-auto flex max-w-[1240px] items-stretch justify-between px-6">
-      <Link href="/" className="flex items-center gap-2.5 py-2.5 pr-6" onClick={() => { setOpen(null); setM(false); }}><Image src="/assets/logo-mark.png" alt={tr("CTC logo")} width={42} height={41} priority /><span className="text-lg font-semibold tracking-tight"><Localized>{"Click to Create"}</Localized></span></Link>
-      <nav className="hidden items-stretch gap-7 lg:flex"><Btn k="services" label={tr(nav.services)} /><Link href="/packages" onMouseEnter={() => setOpen(null)} className="flex items-center text-[15px]"><Localized>{tr(nav.packages)}</Localized></Link><Btn k="resources" label="Resources" /><Btn k="company" label="Company" /></nav>
-      <div className="flex items-center gap-2"><div className={`hidden rounded-full border p-0.5 text-xs font-semibold sm:flex ${solid ? "border-hair" : "border-white/30"}`}>{(["en", "my"] as const).map((l) => <button key={l} onClick={() => setLang(l)} aria-pressed={lang === l} className={`rounded-full px-2.5 py-1 ${lang === l ? (solid ? "bg-navy text-white" : "bg-white text-navy") : "opacity-70"}`}><Localized>{l === "en" ? "EN" : "မြန်မာ"}</Localized></button>)}</div>
+      <Link href="/" className="flex items-center gap-2.5 py-2.5 pr-6" onClick={() => { setOpen(null); setM(false); }}><Image src="/assets/logo-mark.png" alt={tr("CTC logo")} width={42} height={41} priority /><span className="hidden text-lg font-semibold tracking-tight sm:inline"><Localized>{"Click to Create"}</Localized></span></Link>
+      <nav className="hidden items-stretch gap-4 xl:flex"><Btn k="services" label={tr(nav.services)} /><Link href="/packages" onMouseEnter={() => setOpen(null)} className="flex items-center text-[15px]"><Localized>{tr(nav.packages)}</Localized></Link><Btn k="resources" label="Resources" /><Btn k="company" label="Company" /></nav>
+      <div className="flex items-center gap-2"><LanguageSelect light={!solid} />
         <Magnetic><Link href="/book" className={`btn hidden sm:inline-flex ${solid ? "" : "btn-light"}`}><Localized>{tr(nav.book)}</Localized></Link></Magnetic>
-        <button aria-label={tr("Menu")} aria-expanded={m} onClick={() => setM(!m)} className="p-2 lg:hidden">{m ? <X size={24} /> : <Menu size={24} />}</button></div></div>
-    {open && <div className="hidden border-t border-hair bg-white text-navy shadow-xl lg:block"><div className="mx-auto grid max-w-[1240px] gap-8 px-6 py-8 lg:grid-cols-[1fr_340px]">
+        <button aria-label={tr("Menu")} aria-expanded={m} onClick={() => setM(!m)} className="p-2 xl:hidden">{m ? <X size={24} /> : <Menu size={24} />}</button></div></div>
+    {open && <div className="hidden border-t border-hair bg-white text-navy shadow-xl xl:block"><div className="mx-auto grid max-w-[1240px] gap-8 px-6 py-8 xl:grid-cols-[1fr_340px]">
       {open === "services" && <div className="grid gap-x-8 gap-y-1 md:grid-cols-2">{services.map((s) => <L key={s.slug} href={`/services/${s.slug}`}><div className="flex gap-3 rounded-xl p-3 hover:bg-paper"><span className="grid size-10 shrink-0 place-items-center rounded-xl text-white" style={{ background: s.color }}><Ic name={s.icon} size={20} /></span><div><b className="text-sm"><Localized>{tr(s.name)}</Localized></b><p className="text-xs text-soft"><Localized>{s.offerings.slice(0, 3).map((o) => o.n.en).join(", ")}</Localized><Localized>{" and more"}</Localized></p></div></div></L>)}</div>}
       {open === "resources" && <div className="grid gap-1 md:grid-cols-2">{[["Start your project brief", "/start", "Answer suggested questions for your category"], ["Your road map", "/how-it-works", "From first call to go-live"], ["Updates", "/updates", "News, launches and guides"], ["Events", "/events", "Workshops, webinars and launches"]].map(([n, h, d]) => <L key={h} href={h}><div className="rounded-xl p-4 hover:bg-paper"><b className="text-sm"><Localized>{n}</Localized></b><p className="text-xs text-soft"><Localized>{d}</Localized></p></div></L>)}</div>}
       {open === "company" && <div className="grid gap-1 md:grid-cols-2">{[["About CTC", "/about", "Our story, values and approach"], ["Founders", "/about#founders", "The people behind CTC"], ["Contact", "/contact", "Email us directly"], ["Book a call", "/book", "Free 30-minute scoping call"]].map(([n, h, d]) => <L key={h} href={h}><div className="rounded-xl p-4 hover:bg-paper"><b className="text-sm"><Localized>{n}</Localized></b><p className="text-xs text-soft"><Localized>{d}</Localized></p></div></L>)}</div>}
       <Promo /></div></div>}
-    {m && <div className="max-h-[80vh] overflow-y-auto border-t border-hair bg-white px-6 py-5 text-navy lg:hidden"><div className="grid gap-1">{[[tr(nav.services), "/services"], [tr(nav.packages), "/packages"], [tr(nav.how), "/how-it-works"], [tr(nav.updates), "/updates"], ["Events", "/events"], [tr(nav.about), "/about"], ["Contact", "/contact"]].map(([n, h]) => <Link key={h} href={h} onClick={() => setM(false)} className="border-b border-hair py-3 text-lg font-medium"><Localized>{n}</Localized></Link>)}</div>
-      <div className="mt-4 flex gap-2">{(["en", "my"] as const).map((l) => <button key={l} onClick={() => setLang(l)} className={`rounded-full border px-4 py-2 text-sm ${lang === l ? "border-navy bg-navy text-white" : "border-hair"}`}><Localized>{l === "en" ? "English" : "မြန်မာ"}</Localized></button>)}</div></div>}</header>
+    {m && <div className="max-h-[80vh] overflow-y-auto border-t border-hair bg-white px-6 py-5 text-navy xl:hidden"><div className="grid gap-1">{[[tr(nav.services), "/services"], [tr(nav.packages), "/packages"], [tr(nav.how), "/how-it-works"], [tr(nav.updates), "/updates"], ["Events", "/events"], [tr(nav.about), "/about"], ["Contact", "/contact"]].map(([n, h]) => <Link key={h} href={h} onClick={() => setM(false)} className="border-b border-hair py-3 text-lg font-medium"><Localized>{n}</Localized></Link>)}</div>
+      </div>}</header>
     <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-px border-t border-hair bg-white/95 backdrop-blur-xl sm:hidden"><Link href="/book" className="flex items-center justify-center gap-2 py-3 text-sm font-semibold"><CalendarCheck size={16} /><Localized>{tr(nav.book)}</Localized></Link><Link href="/packages#builder" className="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-sage-deep"><FileText size={16} /><Localized>{"Build package"}</Localized></Link></div></>;
 }

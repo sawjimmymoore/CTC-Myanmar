@@ -33,11 +33,19 @@ Next.js 16 + Tailwind 4 + Supabase. Fonts: Bebas Neue (display), Montserrat (bod
 - Every form (contact, project brief, quote, booking, event registration) saves to Supabase (see it in /admin: Messages, Bookings, Registrations) and emails info@ctcmyanmar.com. Replying to that email replies straight to the customer
 - If an email key is set, the customer also gets a confirmation. Set SEND_CONFIRMATIONS=false to turn confirmations off
 - If Supabase is unavailable but email works, the form still succeeds (the team gets the email). If both fail the visitor sees "please email info@ctcmyanmar.com"
-- Setup check: open /api/health. It shows yes/no for each setting and whether each database table exists (never any secret values)
+- Setup check: sign in first, then open /api/health. Detailed diagnostics require authentication; visitors receive only a minimal availability response.
 - Email uses Resend (https://resend.com): add the domain ctcmyanmar.com, add the DNS records it shows, create an API key, then set RESEND_API_KEY and MAIL_FROM in the host's environment variables
 
 ## Deploy
 - Push to GitHub, import in Vercel, add the env vars, point ctcmyanmar.com at it
+
+## Languages and search
+
+The public site supports English, Burmese, Thai, and Simplified Chinese. The flag and country selector preserves the current page and updates its language URL (`?lang=my`, `?lang=th`, or `?lang=zh`). Public links retain the selected language. The server renders the selected language so crawlers receive localized page content, titles, descriptions, canonical links, and language alternates. `/sitemap.xml` includes each language version.
+
+Thai and Chinese copy is bundled in `content/locales/`. Burmese copy is in `content/myanmar.ts`. Brand and technical names may remain in English. Content objects also accept explicit `th` and `zh` fields, editable alongside English and Myanmar in the existing content editor. New English copy should receive reviewed translations; unknown text is not translated by an external service at runtime.
+
+Set `NEXT_PUBLIC_SITE_URL` to the preferred production origin when using a custom domain. See `SECURITY_REVIEW.md` for the security changes and the account-level checks that remain.
 
 ## Not done yet
 - Phone number (edit footer.phone in Site content, or content/site-content.ts)

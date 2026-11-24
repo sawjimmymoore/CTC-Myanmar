@@ -1,6 +1,6 @@
 "use client";
 import { Localized } from "@/lib/i18n";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import Image from "next/image";
 import Nav from "./Nav";
 import { EMAIL } from "@/content/site-content";
@@ -25,7 +25,7 @@ export function Footer() {
       <Localized>{C(tr(nav.services), services.map((s) => [tr(s.name), `/services/${s.slug}`]))}</Localized>
       <Localized>{C("Start here", [["Your project brief", "/start"], ["Build a package", "/packages#builder"], [tr(nav.how), "/how-it-works"], [tr(nav.updates), "/updates"], ["Events", "/events"]])}</Localized>
       <Localized>{C("CTC", [[tr(nav.how), "/how-it-works"], [tr(nav.packages), "/packages"], [tr(nav.updates), "/updates"], [tr(nav.about), "/about"], ["Contact", "/contact"], ["Privacy", "/privacy"], ["Terms", "/terms"]])}</Localized></div></div>
-    <div className="mx-auto mt-12 flex max-w-[1240px] flex-wrap justify-between gap-3 border-t border-white/10 px-6 pt-6 text-xs text-white/50"><span><Localized>{tr(footer.copy)}</Localized></span><Link href="/admin"><Localized>{"Admin"}</Localized></Link></div></footer>;
+    <div className="mx-auto mt-12 flex max-w-[1240px] flex-wrap justify-between gap-3 border-t border-white/10 px-6 pt-6 text-xs text-white/50"><span><Localized>{tr(footer.copy)}</Localized></span></div></footer>;
 }
 export function Page({ children }: { children: React.ReactNode }) { return <><Nav /><main><Localized>{children}</Localized></main><Footer /></>; }
 export function Head({ tag, title, sub }: { tag: string; title: string; sub?: React.ReactNode }) {

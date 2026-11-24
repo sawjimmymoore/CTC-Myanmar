@@ -1,10 +1,11 @@
+import { generatePageMetadata } from "@/lib/seo";
 import { LocalDate, Localized } from "@/lib/i18n";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { Head } from "@/components/Site";
 import { CtaBand } from "@/components/Blocks";
 import { publicClient } from "@/lib/supabase/public";
 export const revalidate = 60;
-export const metadata = { title: "Events", description: "Workshops, webinars and launches from CTC." };
+export async function generateMetadata() { return generatePageMetadata(); }
 type E = { slug: string; title: string; kind: string; starts_at: string; location: string | null; online: boolean; description: string };
 const Card = ({ e, past }: { e: E; past?: boolean }) => <Link href={`/events/${e.slug}`} className={`card-glow flex gap-5 rounded-3xl border border-hair bg-white p-6 ${past ? "opacity-70" : ""}`}><div className="grid size-16 shrink-0 place-items-center rounded-2xl bg-navy text-center text-white"><span className="font-display text-3xl leading-none"><LocalDate value={e.starts_at} options={{ day: "numeric" }} /></span><span className="-mt-3 text-[10px] uppercase"><LocalDate value={e.starts_at} options={{ month: "short" }} /></span></div><div><small className="eyebrow"><Localized>{e.kind}</Localized><Localized>{e.online ? " - Online" : e.location ? ` - ${e.location}` : ""}</Localized></small><h3 className="h-sec mt-1 text-xl"><Localized>{e.title}</Localized></h3><p className="mt-1 line-clamp-2 text-sm text-soft"><Localized>{e.description}</Localized></p></div></Link>;
 export default async function Events() {

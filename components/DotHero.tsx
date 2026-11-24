@@ -1,6 +1,6 @@
 "use client";
 import { Localized } from "@/lib/i18n";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Ic } from "./Icons";

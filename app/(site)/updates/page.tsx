@@ -1,9 +1,10 @@
+import { generatePageMetadata } from "@/lib/seo";
 import { LocalDate, Localized } from "@/lib/i18n";
-import Link from "next/link";
+import Link from "@/components/LocaleLink";
 import { Head } from "@/components/Site";
 import { publicClient } from "@/lib/supabase/public";
 export const revalidate = 60;
-export const metadata = { title: "Updates" };
+export async function generateMetadata() { return generatePageMetadata(); }
 export default async function Updates() {
   const db = publicClient();
   const { data } = db ? await db.from("posts").select("slug,title,category,excerpt,cover_url,published_at").eq("published", true).order("published_at", { ascending: false }) : { data: [] };

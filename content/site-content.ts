@@ -1,7 +1,7 @@
 // Editable site content. English is the source; Burmese (my) falls back to English when empty.
 // Anything here can be edited from /admin > Content, with draft and publish.
 import { MY_COPY } from "./myanmar";
-export interface Bi { en: string; my: string }
+export interface Bi { en: string; my: string; th?: string; zh?: string }
 const b = (en: string, my = ""): Bi => ({ en, my: MY_COPY[en] ?? my });
 export const EMAIL = "info@ctcmyanmar.com";
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Plus, Trash2, Upload, X, Loader2, Images } from "lucide-react";
+import { translateText } from "@/lib/translate";
 const PROGRAM_ICONS = ["star"];
 import { uploadGalleryImage, listGalleryImages, type GalleryFile } from "@/lib/gallery";
 
@@ -222,49 +223,18 @@ function labelize(key: string) {
  * what lets the admin editor work for every content section without a
  * hand-written form per section - it just reflects the JSON structure. */
 export default function AutoField({ label, value, onChange, depth = 0 }: AutoFieldProps) {
-  // Bilingual {en, my} pair - the most common shape in this content model.
+  // Four-language content. Empty translations use the bundled site copy.
   if (isBilingual(value)) {
-    return (
-      <div>
-        <label className="text-xs font-medium text-ink/60">{label}</label>
-        <div className="mt-1 grid gap-2 sm:grid-cols-2">
-          <div>
-            <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-ink/35">English</div>
-            {value.en.length > 70 ? (
-              <textarea
-                rows={3}
-                value={value.en}
-                onChange={(e) => onChange({ ...value, en: e.target.value })}
-                className="w-full rounded-lg border border-line bg-cream px-3 py-2 text-sm outline-none focus:border-maroon-700"
-              />
-            ) : (
-              <input
-                value={value.en}
-                onChange={(e) => onChange({ ...value, en: e.target.value })}
-                className="w-full rounded-lg border border-line bg-cream px-3 py-2 text-sm outline-none focus:border-maroon-700"
-              />
-            )}
-          </div>
-          <div>
-            <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-ink/35">Myanmar</div>
-            {value.my.length > 70 ? (
-              <textarea
-                rows={3}
-                value={value.my}
-                onChange={(e) => onChange({ ...value, my: e.target.value })}
-                className="w-full rounded-lg border border-line bg-cream px-3 py-2 text-sm outline-none focus:border-maroon-700"
-              />
-            ) : (
-              <input
-                value={value.my}
-                onChange={(e) => onChange({ ...value, my: e.target.value })}
-                className="w-full rounded-lg border border-line bg-cream px-3 py-2 text-sm outline-none focus:border-maroon-700"
-              />
-            )}
-          </div>
-        </div>
-      </div>
-    );
+    const pair = value as Record<string, string>;
+    const languages = [{ code: "en", label: "English" }, { code: "my", label: "Myanmar" }, { code: "th", label: "Thai" }, { code: "zh", label: "Simplified Chinese" }] as const;
+    return <div><label className="text-xs font-medium text-ink/60">{label}</label>
+      <div className="mt-2 grid gap-4 sm:grid-cols-2">{languages.map((language) => <div key={language.code}>
+        <label className="grid gap-1 text-xs font-medium text-ink/60"><span>{language.label}</span>
+          <textarea rows={value.en.length > 70 ? 4 : 2} value={pair[language.code] ?? ""} placeholder={language.code === "en" ? "" : translateText(value.en, language.code)} onChange={(event) => onChange({ ...value, [language.code]: event.target.value })} className="w-full rounded-lg border border-line bg-cream px-3 py-2 text-sm outline-none focus:border-maroon-700" />
+        </label>
+      </div>)}</div>
+      <p className="mt-1 text-xs text-ink/45">Empty translations use the existing site translation where available. Review all four versions after changing the English copy.</p>
+    </div>;
   }
 
   // Array of objects (e.g. programs, opportunities, impact rows) - repeatable cards.
