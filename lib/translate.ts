@@ -15,12 +15,18 @@ export function translateText(text: string, lang: Lang = "my"): string {
   if (lang === "en") return plainCopy(text);
   const trimmed = text.trim(); const match = CATALOGS[lang][trimmed];
   if (match) return plainCopy(text.replace(trimmed, match));
-  for (const prefix of ["Packages for ", "Add-ons for "]) {
+  const browse = /^Browse all (\d+) services$/.exec(trimmed);
+  if (browse) {
+    if (lang === "my") return `Services ${browse[1]} ခုလုံး ကြည့်ရန်`;
+    if (lang === "th") return `ดูบริการทั้งหมด ${browse[1]} รายการ`;
+    return `查看全部 ${browse[1]} 项服务`;
+  }
+  for (const prefix of ["Packages for ", "Add-ons for ", "Your road map for "]) {
     if (trimmed.startsWith(prefix)) {
       const name = translateText(trimmed.slice(prefix.length), lang);
-      if (lang === "my") return name + (prefix === "Packages for " ? " အတွက် Packages" : " အတွက် Add-ons");
-      if (lang === "th") return (prefix === "Packages for " ? "แพ็กเกจสำหรับ" : "บริการเสริมสำหรับ") + name;
-      return name + (prefix === "Packages for " ? "服务套餐" : "增值服务");
+      if (lang === "my") return name + (prefix === "Packages for " ? " အတွက် Packages" : prefix === "Add-ons for " ? " အတွက် Add-ons" : " အတွက် Project အဆင့်ဆင့်");
+      if (lang === "th") return (prefix === "Packages for " ? "แพ็กเกจสำหรับ" : prefix === "Add-ons for " ? "บริการเสริมสำหรับ" : "ขั้นตอนสำหรับ") + name;
+      return name + (prefix === "Packages for " ? "服务套餐" : prefix === "Add-ons for " ? "增值服务" : "项目流程");
     }
   }
   for (const separator of [" + ", ", "]) {

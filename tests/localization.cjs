@@ -58,6 +58,9 @@ function inspect(value, location = 'content') {
 inspect(content);
 assert.equal(translateText('Services', 'my'), 'Services');
 assert.equal(translateText('Packages', 'my'), 'Packages');
+assert.equal(translateText('Add-ons for Websites', 'my'), 'Websites အတွက် Add-ons');
+assert.equal(translateText('Browse all 58 services', 'my'), 'Services 58 ခုလုံး ကြည့်ရန်');
+assert.equal(translateText('Your road map for Websites', 'my'), 'Websites အတွက် Project အဆင့်ဆင့်');
 assert.equal(translateText('Website maintenance', 'my'), 'Website Maintenance');
 assert.match(translateText('The right system for how your team really works.', 'my'), /System/);
 assert.equal(translate({ en: 'Services', my: 'ဝန်ဆောင်မှုများ' }, 'my'), 'Services');
