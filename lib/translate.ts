@@ -1,4 +1,5 @@
 import legacyMyanmar from "../content/legacy-myanmar.json";
+import previousMyanmar from "../content/previous-myanmar.json";
 import { MY_COPY } from "../content/myanmar";
 import thai from "../content/locales/th.json";
 import chinese from "../content/locales/zh.json";
@@ -6,6 +7,10 @@ import { plainCopy } from "./copy-style";
 import type { Lang } from "./locales";
 export type Copy = { en: string; my?: string; th?: string; zh?: string };
 export const CATALOGS: Record<Lang, Record<string, string>> = { en: {}, my: MY_COPY, th: thai, zh: chinese };
+/** Refresh shipped copy while preserving an owner's custom Burmese edits. */
+export function isPreviousMyanmar(english: string, localized: string): boolean {
+  return localized === (legacyMyanmar as Record<string, string>)[english] || localized === (previousMyanmar as Record<string, string>)[english];
+}
 export function translateText(text: string, lang: Lang = "my"): string {
   if (lang === "en") return plainCopy(text);
   const trimmed = text.trim(); const match = CATALOGS[lang][trimmed];
@@ -13,7 +18,7 @@ export function translateText(text: string, lang: Lang = "my"): string {
   for (const prefix of ["Packages for ", "Add-ons for "]) {
     if (trimmed.startsWith(prefix)) {
       const name = translateText(trimmed.slice(prefix.length), lang);
-      if (lang === "my") return name + (prefix === "Packages for " ? " အတွက် ပက်ကေ့ချ်များ" : " အတွက် ထပ်ဆောင်းဝန်ဆောင်မှုများ");
+      if (lang === "my") return name + (prefix === "Packages for " ? " အတွက် Packages" : " အတွက် Add-ons");
       if (lang === "th") return (prefix === "Packages for " ? "แพ็กเกจสำหรับ" : "บริการเสริมสำหรับ") + name;
       return name + (prefix === "Packages for " ? "服务套餐" : "增值服务");
     }
@@ -35,6 +40,6 @@ export function translate(value: Copy | string | undefined, lang: Lang): string 
   if (!value) return "";
   if (typeof value === "string") return translateText(value, lang);
   const localized = value[lang];
-  if (lang !== "en" && localized && !(lang === "my" && localized === (legacyMyanmar as Record<string, string>)[value.en])) return plainCopy(localized);
+  if (lang !== "en" && localized && !(lang === "my" && isPreviousMyanmar(value.en, localized))) return plainCopy(localized);
   return translateText(value.en, lang);
 }

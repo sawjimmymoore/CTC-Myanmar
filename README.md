@@ -45,6 +45,8 @@ The public site supports English, Burmese, Thai, and Simplified Chinese. The fla
 
 Thai and Chinese copy is bundled in `content/locales/`. Burmese copy is in `content/myanmar.ts`. Brand and technical names may remain in English. Content objects also accept explicit `th` and `zh` fields, editable alongside English and Myanmar in the existing content editor. New English copy should receive reviewed translations; unknown text is not translated by an external service at runtime.
 
+Burmese copy should sound like a clear conversation about the customer's work, rather than a word-for-word translation. Keep familiar labels such as Services, System, Workflow, Packages, Quotation, and established service names in English. Explain what they do in natural Burmese. Avoid forced Burmese terminology and decorative dash separators. The English language option is labelled English, with its flag, rather than United Kingdom.
+
 Set `NEXT_PUBLIC_SITE_URL` to the preferred production origin when using a custom domain. See `SECURITY_REVIEW.md` for the security changes and the account-level checks that remain.
 
 ## Not done yet

@@ -8,7 +8,8 @@ const content = require('../content/site-content.ts');
 const { MY_COPY } = require('../content/myanmar.ts');
 const { formatDate } = require('../lib/date-format.ts');
 const { plainCopy } = require('../lib/copy-style.ts');
-const { CATALOGS, translateText } = require('../lib/translate.ts');
+const { CATALOGS, translateText, translate } = require('../lib/translate.ts');
+const previousMyanmar = require('../content/previous-myanmar.json');
 const { languageHref } = require('../lib/locales.ts');
 const { sameOrigin, validBooking, consumeRateLimit } = require('../lib/request-security.ts');
 for (const lang of ['th', 'zh']) {
@@ -46,7 +47,8 @@ function inspect(value, location = 'content') {
   if (!value || typeof value !== 'object') return;
   if (typeof value.en === 'string') {
     if (value.en && !retained.has(value.en)) {
-      assert.match(value.my, /[\u1000-\u109f]/, `Missing Burmese copy: ${location}: ${value.en}`);
+      assert.ok(value.my && value.my.trim(), `Missing Burmese copy: ${location}: ${value.en}`);
+      assert.ok(Object.hasOwn(MY_COPY, value.en), `Copy must be explicitly written, including retained English terms: ${value.en}`);
       fields++;
     }
     return;
@@ -54,6 +56,13 @@ function inspect(value, location = 'content') {
   for (const [key, item] of Object.entries(value)) inspect(item, `${location}.${key}`);
 }
 inspect(content);
+assert.equal(translateText('Services', 'my'), 'Services');
+assert.equal(translateText('Packages', 'my'), 'Packages');
+assert.equal(translateText('Website maintenance', 'my'), 'Website Maintenance');
+assert.match(translateText('The right system for how your team really works.', 'my'), /System/);
+assert.equal(translate({ en: 'Services', my: 'ဝန်ဆောင်မှုများ' }, 'my'), 'Services');
+assert.equal(translate({ en: 'Website maintenance', my: previousMyanmar['Website maintenance'] }, 'my'), 'Website Maintenance');
+assert.equal(translate({ en: 'Services', my: 'မိမိရေးထားသော အကြောင်းအရာ' }, 'my'), 'မိမိရေးထားသော အကြောင်းအရာ');
 assert.equal(content.services.reduce((total, s) => total + s.offerings.length, 0), 58);
 assert.ok(fields > 800, `Expected complete long-form copy, found ${fields} fields`);
 for (const message of ['Sending...', 'Booking...', 'Saving...', 'Message sent. We reply within 2 working days.', 'That time was just taken. Pick another slot.', 'We could not send this right now. Please email info@ctcmyanmar.com and we will help.']) {

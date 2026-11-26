@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import * as defaults from "@/content/site-content";
 import { SECTION_KEYS } from "./content-keys";
 import { MY_COPY } from "@/content/myanmar";
-import legacyMyanmar from "@/content/legacy-myanmar.json";
+import { isPreviousMyanmar } from "./translate";
 export { SECTION_KEYS };
 export type SiteContent = Pick<typeof defaults, (typeof SECTION_KEYS)[number]>;
 /** Upgrade missing/legacy translations without overwriting a custom Burmese edit. */
@@ -11,7 +11,7 @@ export function completeTranslations(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(completeTranslations);
   if (!value || typeof value !== "object") return value;
   const record = value as Record<string, unknown>;
-  if (typeof record.en === "string" && MY_COPY[record.en] && (!record.my || record.my === (legacyMyanmar as Record<string, string>)[record.en])) {
+  if (typeof record.en === "string" && MY_COPY[record.en] && (!record.my || (typeof record.my === "string" && isPreviousMyanmar(record.en, record.my)))) {
     return { ...record, my: MY_COPY[record.en] };
   }
   return Object.fromEntries(Object.entries(record).map(([key, item]) => [key, completeTranslations(item)]));
