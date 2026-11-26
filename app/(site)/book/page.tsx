@@ -1,6 +1,7 @@
 "use client";
 import { useLang, useTr, Localized } from "@/lib/i18n";
 import { formatDate } from "@/lib/date-format";
+import { bookingDays } from "@/lib/booking-calendar";
 import { useActionState, useEffect, useMemo, useState } from "react";
 import { Head } from "@/components/Site";
 import { bookCall, slotsFor } from "@/app/actions";
@@ -10,7 +11,7 @@ const fld = "w-full rounded-xl border border-hair bg-white px-4 py-3 text-sm out
 export default function Book() { const tr = useTr(); const { lang } = useLang();
   const [r, act, pending] = useActionState(bookCall, null); const { services } = useContent();
   const [date, setDate] = useState(""); const [time, setTime] = useState(""); const [taken, setTaken] = useState<string[]>([]);
-  const days = useMemo(() => { const out: string[] = []; const d = new Date(); while (out.length < 14) { d.setDate(d.getDate() + 1); if (d.getDay() % 6) out.push(d.toISOString().slice(0, 10)); } return out; }, []);
+  const days = useMemo(() => bookingDays(), []);
   useEffect(() => { if (date) slotsFor(date).then(setTaken); }, [date, r]);
   return <><Head tag="Book" title={tr("Book a scoping call.")} sub="30 minutes. We confirm approval limits, data to import and your goals. Times are Myanmar time, Monday to Friday." />
     <form action={act} className="mx-auto grid max-w-3xl gap-6 px-6 pb-28"><input name="website" tabIndex={-1} autoComplete="off" className="hidden" />

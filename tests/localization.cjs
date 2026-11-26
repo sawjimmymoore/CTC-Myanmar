@@ -7,6 +7,11 @@ require.extensions['.ts'] = (module, file) => module._compile(ts.transpile(fs.re
 const content = require('../content/site-content.ts');
 const { MY_COPY } = require('../content/myanmar.ts');
 const { formatDate } = require('../lib/date-format.ts');
+const { bookingDays } = require('../lib/booking-calendar.ts');
+const offeredDays = bookingDays(Date.parse('2026-11-26T20:00:00Z'));
+assert.equal(offeredDays[0], '2026-11-30');
+assert.equal(offeredDays.length, 14);
+assert.ok(offeredDays.every((date) => ![0, 6].includes(new Date(date + 'T12:00:00Z').getUTCDay())));
 const { plainCopy } = require('../lib/copy-style.ts');
 const { CATALOGS, translateText, translate } = require('../lib/translate.ts');
 const previousMyanmar = require('../content/previous-myanmar.json');
